@@ -1,44 +1,40 @@
-from SETTINGS import COUNT_BOT
-
 hi_user = 'Welcome Back!👋 '
 
-help_message = f'''In order to get started🏃‍♂️, enter "RUN". \n To reset🌪️ the parameters, type "RESET"'''
+help_message = f'''
+                    In order to use the bot you need click settings,\n
+                    then choose settings for social networks and follow the steps.\n
+                '''
 
 start_message = hi_user + '\n' + help_message
 
+# ________________________________________ Buttons and input fields for user ________________________________________
+back = '<<< Back'
 
-# __________________________________ button _________________________________________#
-btn_reset = "RESET"
-btn_run_work = 'RUN'
+# _____________________________________________________________________________________ main btns
+main_btn_list = ['Instagram', 'TikTok', 'Settings']
+main_input_field = 'Choose one for start'
 
-# ___________________________________ FMS State _______________________________________________ #
-reset_msg = 'Your settings have been reset. 🌪️'
+# _____________________________________________________________________________________ settings btns
+settings_btn_list = ['SetUP TikTok', 'SetUP Instagram', 'SetUP Telegram', '<<< Back']
+settings_input_field = 'Choose one social network for setUP'
 
-reddit_link = "🔗 Link to post: "
-
-upvote_int = "Count 🆙vote: "
-error_vote_int = "__Error!🙃 Your number must be a whole number.__ Try again."
-error_vote_int_2 = f"You can't enter more than {COUNT_BOT} bots🤖. Try again."
-# comments_int = "Кількість коментарів (якщо потрібно)"
-# error_comments_int = "Помилка! Ваша відповідь не є цілим числом./Кількість коментарів (якщо потрібно).(тільки ціле число)"
-
-# ___________________________ message for notification about finsh process ______________________ #
-notif_browser_run = 'Bot work🙂'
-start_process = "Wait Please🧘‍♂️"
-finish_process = "Your request has been processed!💫"
-process_wrong = """
-                Server sleeps🤔.\n
-                 Try again send your post\n
-                  if you have any questions, please write me👇\n
-                   @happy_lite_smile
-            """
-
-post_is_sent = "Your post already upvoted👍"
-this_link_is_not_post = "This link is not post🤔. Check your link"
+# ________________________________________ Buttons and input fields for admin ________________________________________
 
 
-# ___________________________ deleted post______________________________
-deleted_post = "Post has been deleted...🥲 \n We can't continue upvoting😑!"
-not_enough_bots = f"Hmm...🤔 Not enough bots!\n" \
+# ______________________________________________ Questions Setup insta ________________________________________________
+
+quest_insta_login = 'Enter your login for Instagram'
+quest_insta_password = 'Enter your password for Instagram'
+
+success = 'Successfully!'
 
 
+# ______________________________________________ Questions Setup tiktok ________________________________________________
+
+quest_tiktok_login = 'Enter your login for TikTok'
+quest_tiktok_password = 'Enter your password for TikTok'
+
+# ______________________________________________ Questions Setup telegram _____________________________________________
+
+quest_telegram_id = 'Enter your api id for Telegram'
+quest_telegram_hash = 'Enter your api hash for Telegram'

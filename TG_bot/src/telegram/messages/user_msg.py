@@ -1,52 +1,72 @@
 from typing import TypedDict
 
-from SETTINGS import mine_project
-
-
-if mine_project:
-    from .mine_USER_text import *
-else:
-    from .nochance_user_text import *
+from .mine_USER_text import *
 
 
 class Messages(TypedDict):
     start: str
+    start_message: str
     help: str
-    reddit_link: str
-    error_vote_int: str
-    upvote_int: str
-    start_process: str
-    finish_process: str
-    deleted_post: str
-    reset_msg: str
-    btn_reset: str
-    notif_browser_run: str
-    hi_user: str
-    btn_run_work: str
-    not_enough_bots: str
-    process_wrong: str
-    error_vote_int_2: str
-    post_is_sent: str
-    this_link_is_not_post: str
+    main_btn_list: list
+    main_input_field: str
+    settings_btn_list: list
+    settings_input_field: str
+    back: str
 
 
 MESSAGES: Messages = {
     'start': start_message,
+    'start_message': start_message,
     'help': help_message,
-    'reddit_link': reddit_link,
-    'error_vote_int': error_vote_int,
-    'upvote_int': upvote_int,
-    'start_process': start_process,
-    'finish_process': finish_process,
-    'deleted_post': deleted_post,
-    'reset_msg': reset_msg,
-    'btn_reset': btn_reset,
-    'notif_browser_run': notif_browser_run,
-    'hi_user': hi_user,
-    'btn_run_work': btn_run_work,
-    'not_enough_bots': not_enough_bots,
-    'process_wrong': process_wrong,
-    'error_vote_int_2': error_vote_int_2,
-    "post_is_sent": post_is_sent,
-    "this_link_is_not_post": this_link_is_not_post,
+
+    'main_btn_list': main_btn_list,
+    'main_input_field': main_input_field,
+
+    'settings_btn_list': settings_btn_list,
+    'settings_input_field': settings_input_field,
+
+    'back': back
+}
+
+
+# ______________________________________________ Questions Setup insta ________________________________________________
+class SetUpInstaMessages(TypedDict):
+    quest_insta_login: str
+    quest_insta_password: str
+    success: str
+
+
+SetUpInstaMessages: SetUpInstaMessages = {
+    'quest_insta_login': quest_insta_login,
+    'quest_insta_password': quest_insta_password,
+
+    'success': success
+}
+
+
+# ______________________________________________ Questions Setup tiktok ________________________________________________
+class SetUpTikTokMessages(TypedDict):
+    quest_tiktok_login: str
+    quest_tiktok_password: str
+    success: str
+
+
+SetUpTikTokMessages: SetUpTikTokMessages = {
+    'quest_tiktok_login': quest_tiktok_login,
+    'quest_tiktok_password': quest_tiktok_password,
+    'success': success
+}
+
+
+# ______________________________________________ Questions Setup telegram _____________________________________________
+class SetUpTelegramMessages(TypedDict):
+    quest_telegram_id: str
+    quest_telegram_hash: str
+    success: str
+
+
+SetUpTelegramMessages: SetUpTelegramMessages = {
+    'quest_telegram_id': quest_telegram_id,
+    'quest_telegram_hash': quest_telegram_hash,
+    'success': success
 }

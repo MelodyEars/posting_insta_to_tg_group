@@ -1,12 +1,5 @@
 from typing import TypedDict
-
-from SETTINGS import mine_project
-
-
-if mine_project:
-    from .mine_ADMIN_text import *
-else:
-    from .nochance_Admin_text import *
+from .mine_ADMIN_text import *
 
 
 class Messages(TypedDict):
