@@ -33,7 +33,7 @@ async def helper(message: Message):
 @user_router.message(F.text == MESSAGES['back'])
 async def back_handl(message: Message):
     await message.reply(
-        "",
+        "ㅤ",
         reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
                                txt_input_field=MESSAGES['main_input_field'])
     )
@@ -51,7 +51,7 @@ async def starter_work(message: Message):
 
     elif message.text == MESSAGES['main_btn_list'][2]:  # Settings
         await message.answer(
-            '',
+            'ㅤ',
             reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
                                    txt_input_field=MESSAGES['settings_input_field'])
         )
@@ -73,7 +73,7 @@ async def setup_social_network(message: Message,  state: FSMContext):
 
     elif message.text == MESSAGES['settings_btn_list'][3]:  # <<< Back
         await message.answer(
-            '',
+            'ㅤ',
             reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
                                    txt_input_field=MESSAGES['main_input_field'])
         )

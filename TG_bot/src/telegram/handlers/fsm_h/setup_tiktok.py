@@ -30,7 +30,7 @@ async def cancel_handler(message: Message, state: FSMContext):
 
     await state.clear()
     await message.reply(
-        '',
+        'ㅤ',
         reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
                                txt_input_field=MESSAGES['settings_input_field'])
     )
@@ -47,7 +47,6 @@ async def answer_login(message: Message, state: FSMContext):
 @user_router.message(SetUpTikTok.tiktok_password)
 async def answer_password(message: Message, state: FSMContext):
     await state.update_data(tiktok_password=message.text)
-    await state.clear()
 
     data = await state.get_data()
     struct_data = StructData(**data)
@@ -55,6 +54,7 @@ async def answer_password(message: Message, state: FSMContext):
     logger.info(struct_data.tiktok_login)
     logger.info(struct_data.tiktok_password)
 
+    await state.clear()
     await message.reply(
         SetUpTikTokMessages['success'],
         reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
