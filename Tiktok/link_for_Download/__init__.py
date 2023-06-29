@@ -1,0 +1,1 @@
+from .get_link_for_download import TiktokDownloader

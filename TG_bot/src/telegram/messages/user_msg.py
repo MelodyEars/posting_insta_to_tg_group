@@ -70,3 +70,25 @@ SetUpTelegramMessages: SetUpTelegramMessages = {
     'quest_telegram_hash': quest_telegram_hash,
     'success': success
 }
+
+
+# ______________________________________________ Handling Error _____________________________________________
+class ErrorMessages(TypedDict):
+    request_attend_settings: str
+
+
+ErrorMessages: ErrorMessages = {
+    'request_attend_settings': request_attend_settings
+}
+
+
+# ______________________________________________ Successfully Actions _____________________________________________
+class ProcessActions(TypedDict):
+    begin_download: str
+    download_success: str
+
+
+ProcessActions: ProcessActions = {
+    'begin_download': begin_download,
+    'download_success': download_success
+}

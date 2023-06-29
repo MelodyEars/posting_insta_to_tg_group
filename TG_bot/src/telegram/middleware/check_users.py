@@ -2,7 +2,7 @@ from typing import Callable, Any, Awaitable
 from aiogram import BaseMiddleware
 from aiogram.types import Message
 
-from TG_bot.src.database.tables import AllowedUser
+from database.query.users import db_get_access_id_users
 
 
 class CheckUser(BaseMiddleware):
@@ -12,6 +12,6 @@ class CheckUser(BaseMiddleware):
         event: Message,
         data: dict[str, Any]
     ) -> Any:
-        allowed_users = [user.username for user in AllowedUser.select()]
-        if event.from_user.username in allowed_users:
+        allowed_users = db_get_access_id_users()
+        if event.from_user.id in allowed_users:
             return await handler(event, data)

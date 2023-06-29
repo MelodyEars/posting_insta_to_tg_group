@@ -13,17 +13,14 @@ from selenium.webdriver.common.by import By
 from Tiktok.Settings_Selenium import BaseClass
 
 
-class ssstik_io(BaseClass):
-    def __init__(self, proxy=None):
+class TiktokDownloader(BaseClass):
+    def __init__(self, tt_name: str, proxy=None):
         super().__init__()
-        self.download_path = Path('tiktok_videos')
+        self.tt_name = tt_name
         self.proxy = proxy
 
     def __enter__(self):
-        self.DRIVER = self.run_driver(proxy=self.proxy, headless=True, download_path=self.download_path)
-
-        self.DRIVER.get('https://ssstik.io/en')
-        self.elem_exists('body', by=By.TAG_NAME, wait=120)
+        self.DRIVER = self.run_driver(proxy=self.proxy, headless=True)
 
         return self
 
@@ -35,11 +32,12 @@ class ssstik_io(BaseClass):
 
         self.DRIVER.quit()
 
+    # _________________________________________________________________  download video
     @staticmethod
-    def download_video(url: str) -> Path:
+    def download_video(url: str, video_num: str | int) -> Path:
         folder = Path('tiktok_videos')
 
-        name_video = str(uuid4()) + ".mp4"
+        name_video = str(video_num) + ".mp4"
 
         folder.mkdir(exist_ok=True)
 
@@ -57,22 +55,34 @@ class ssstik_io(BaseClass):
 
         return filepath
 
-    def get_info_video(self, url_tiktok_video) -> tuple[str, Path]:
+    def get_info_video(self, video_num: str | int) -> tuple[str, Path]:
+        url_tiktok_video = f'https://www.tiktok.com/@{self.tt_name}/video/{video_num}?lang=en'
+
+        # attend site for download video without watermark
+        self.DRIVER.get('https://ssstik.io/en')
+        self.elem_exists('body', by=By.TAG_NAME, wait=120)
+
+        # input url
         self.send_text_by_elem(value='main_page_text', text_or_key=url_tiktok_video + "\n", by=By.ID, wait=120)
         time.sleep(2)
+
+        # get link for download
         link_video = self.elem_exists('//div[@id="target"]//a', wait=120, return_xpath=True).get_attribute("href")
+
+        # get info about video(name, hashtag)
         name = self.elem_exists('p.maintext', by=By.CSS_SELECTOR, wait=120).text()
-        video_path = self.download_video(link_video)
+
+        video_path: Path = self.download_video(link_video, video_num)
 
         return name, video_path
 
-    def back_page(self):
-        self.DRIVER.back()
-
-    def get_all_video_by_tiktokname(self, tiktok_name: str, scroll=False):
-        self.DRIVER.get(f'https://www.tiktok.com/@{tiktok_name}?lang=en')
+    # _________________________________________________________________  get all video from user
+    def get_all_video_by_tiktokname(self, scroll=False) -> list:
+        # go to main page of user
+        self.DRIVER.get(f'https://www.tiktok.com/@{self.tt_name}?lang=en')
         self.elem_exists('body', by=By.TAG_NAME, wait=120)
 
+        # in order to get all videos need to scroll a page
         if scroll:
             offset = 30
             while self.elem_exists(f'(//div[@data-e2e="user-post-item-list"]/div)[{offset}]', scroll_to=True, wait=30):
@@ -91,11 +101,3 @@ class ssstik_io(BaseClass):
 
         video_list = list(json_data['ItemList']["user-post"]["list"])
         return video_list
-
-
-if __name__ == '__main__':
-    with ssstik_io() as api:
-        print(len(api.get_all_video_by_tiktokname("therock", scroll=True)))
-        api.DRIVER.quit()
-
-

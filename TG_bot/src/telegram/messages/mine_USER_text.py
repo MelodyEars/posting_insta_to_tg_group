@@ -38,3 +38,17 @@ quest_tiktok_password = 'Enter your password for TikTok'
 
 quest_telegram_id = 'Enter your api id for Telegram'
 quest_telegram_hash = 'Enter your api hash for Telegram'
+
+
+# ______________________________________________ Handling Error _____________________________________________
+request_attend_settings = '''
+Please, set up your social networks first. \n
+Click settings and follow the steps. \n
+Check Telegram and 
+'''
+
+
+# ______________________________________________ Process Actions _____________________________________________
+begin_download = 'Start download'
+download_success = 'Download successfully! Then add to your channel'
+

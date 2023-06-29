@@ -10,7 +10,7 @@ from aiogram.webhook.aiohttp_server import (
 )
 
 from TG_bot.setup import dp, bot
-from TG_bot.src.database.tables import create_tables_user_tg
+from database.tables import create_tables_user_tg
 from TG_bot.src.telegram.middleware.admin_only import AdminOnly
 from TG_bot.src.telegram.middleware.check_users import CheckUser
 from TG_bot.src.telegram.handlers.admin_handlers import admin_router

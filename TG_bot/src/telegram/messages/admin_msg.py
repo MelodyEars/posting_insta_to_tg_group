@@ -10,6 +10,7 @@ class Messages(TypedDict):
     has_many_user: str
     cmd_admin: str
     send_username: str
+    error_enter_username: str
 
 
 admin_MESSAGES: Messages = {
@@ -19,5 +20,6 @@ admin_MESSAGES: Messages = {
     'has_access': has_access,
     'has_many_user': has_many_user,
     'cmd_admin': cmd_admin,
-    'send_username': send_username
+    'send_username': send_username,
+    'error_enter_username': error_enter_username
 }

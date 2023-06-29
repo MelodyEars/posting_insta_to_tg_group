@@ -4,6 +4,7 @@ user_denied = "Not found this user ⚠️"
 added_user = "access was granted ✅"
 has_access = 'User already has access 🗿'
 has_many_user = ""
+error_enter_username = "Please enter ID telegrams user ⚠️, \n Could you try this?"
 
 # ________________________________________ handlers _____________________________________ #
 cmd_admin = '/all_users - see 👀 all user\n'\
