@@ -50,5 +50,5 @@ Check Telegram and
 
 # ______________________________________________ Process Actions _____________________________________________
 begin_download = 'Start download'
-download_success = 'Download successfully! Then add to your channel'
-
+download_success = 'Download successfully!'
+sent_success = 'Sent to your channel!'

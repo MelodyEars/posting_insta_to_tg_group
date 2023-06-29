@@ -30,11 +30,7 @@ def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
 
     db_add_downloaded_video(video_records)
 
-    return ProcessActions['download_success']
-
 
 async def run_process_tt(obj_tiktok_user: TikTokUser, all_video=False):
     with ProcessPoolExecutor as executor:
-        msg = await asyncio.get_running_loop().run_in_executor(executor, get_video_from_tiktok, obj_tiktok_user, all_video)
-
-    return msg
+        await asyncio.get_running_loop().run_in_executor(executor, get_video_from_tiktok, obj_tiktok_user, all_video)

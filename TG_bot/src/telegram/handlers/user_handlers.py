@@ -7,12 +7,14 @@ from aiogram.filters import Command
 
 from TG_bot.setup import user_router
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
+from TG_bot.src.telegram.handlers.btn_task_main_menu import tiktok_btn_task
 from TG_bot.src.telegram.handlers.fsm_h.setup_instagram import SetUpInstagram
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
 from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpInstaMessages, SetUpTikTokMessages, \
     SetUpTelegramMessages, ErrorMessages, ProcessActions
-from database.query.users import db_get_tt_name_by_tg_id, get_user_by_tg_id
+from database.query.tt_work import db_get_tt_name_by_tg_id
+from database.query.users import get_user_by_tg_id
 
 from Tiktok import run_process_tt
 
@@ -52,16 +54,14 @@ async def starter_work(message: Message):
 
     elif message.text == MESSAGES['main_btn_list'][1]:  # TikTok
         # TODO check status for download all videos
+        # TODO check number of videos in db and then add to db
+
         if (
                 (obj_tiktok_user := db_get_tt_name_by_tg_id(message.from_user.id)) and
-                (name_group_telegram := get_user_by_tg_id(message.from_user.id).name_group_telegram is not None)
+                (group_chat_id := get_user_by_tg_id(message.from_user.id).group_chat_id is not None)
         ):
-            await message.answer(ProcessActions['begin_download'],)
-            # run browser and add downloaded video to db
-            download_one = asyncio.create_task(run_process_tt(obj_tiktok_user))
-            msg = await download_one
-            await message.answer(msg)
-            # TODO send video to telegram chanel
+            tt_btn = asyncio.create_task(tiktok_btn_task(message, obj_tiktok_user, group_chat_id))
+            await tt_btn
         else:
             await message.answer(ErrorMessages['request_attend_settings'] + 'Tiktok',)
             # Todo add inline-button for setup tiktok and telegram
@@ -73,8 +73,6 @@ async def starter_work(message: Message):
                                    txt_input_field=MESSAGES['settings_input_field'])
         )
 
-
-# TODO Check all videos in db and send to telegram chanel
 
 @user_router.message(F.text.in_(MESSAGES['settings_btn_list']))
 async def setup_social_network(message: Message,  state: FSMContext):

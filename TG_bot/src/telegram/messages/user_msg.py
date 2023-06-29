@@ -86,9 +86,11 @@ ErrorMessages: ErrorMessages = {
 class ProcessActions(TypedDict):
     begin_download: str
     download_success: str
+    sent_success: str
 
 
 ProcessActions: ProcessActions = {
     'begin_download': begin_download,
-    'download_success': download_success
+    'download_success': download_success,
+    'sent_success': sent_success,
 }
