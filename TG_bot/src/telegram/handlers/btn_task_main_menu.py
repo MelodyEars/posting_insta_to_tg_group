@@ -4,7 +4,7 @@ from aiogram.types import Message, FSInputFile
 from TG_bot.setup import bot
 from TG_bot.src.telegram.messages.user_msg import ProcessActions
 from Tiktok import run_process_tt
-from database.query.btns_main_menu import db_get_not_uploaded_videos
+from database.query.btns_main_menu import db_get_not_uploaded_videos, db_update_uploaded_video
 from database.tables import TikTokUser, TikTokVideo
 
 
@@ -14,8 +14,8 @@ async def send_msg_from_db_to_chat(group_chat_id: int):
 
     for obj_video in obj_for_send:
         video_from_pc = FSInputFile(obj_video.path_video)
-        await bot.send_photo(chat_id=group_chat_id, photo=video_from_pc, caption=obj_video.name_video)
-        db_get_not_uploaded_videos(obj_video)
+        await bot.send_video(chat_id=group_chat_id, photo=video_from_pc, caption=obj_video.name_video)
+        db_update_uploaded_video(obj_video)
 
 
 async def tiktok_btn_task(message: Message, obj_tiktok_user: TikTokUser, group_chat_id: int):
