@@ -11,7 +11,7 @@ def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
     msg = ProcessActions['sent_success']
     list_number_videos = db_get_all_videos_numbers(obj_tiktok_user)
     tt_name = obj_tiktok_user.username
-
+    # TODO create only one tt name
     print(f"tt_name: {tt_name}")
     with TiktokDownloader(tt_name=tt_name) as api:
 
