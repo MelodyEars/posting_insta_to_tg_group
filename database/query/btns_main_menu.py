@@ -33,8 +33,8 @@ def db_update_uploaded_video(video: TikTokVideo):
         video.save()
 
 
-def db_get_all_videos_numbers(tt_user_obj) -> list[TikTokVideo]:
+def db_get_all_videos_numbers(tt_user_obj: TikTokUser) -> list[int]:
     with db:
-        videos_obj = TikTokVideo.select().where(TikTokVideo.tiktok_user == tt_user_obj)
-        video_number = [video.number_video for video in videos_obj]
-        return video_number
+        videos_objs = TikTokVideo.select().where(TikTokVideo.tiktok_user == tt_user_obj).execute()
+        list_video_number = [obj_video.number_video for obj_video in videos_objs]
+        return list_video_number

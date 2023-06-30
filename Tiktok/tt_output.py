@@ -30,6 +30,7 @@ def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
                     'name_video': name_video,
                     'path_video': video_path
                 }
+
                 db_add_downloaded_video(video_record)
             else:
                 message = ProcessActions['same_video']
