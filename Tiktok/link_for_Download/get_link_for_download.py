@@ -100,4 +100,5 @@ class TiktokDownloader(BaseClass):
         json_data = json.loads(soup.text)
 
         video_list = list(json_data['ItemList']["user-post"]["list"])
+        print(f"Count videos: {len(video_list)}")
         return video_list
