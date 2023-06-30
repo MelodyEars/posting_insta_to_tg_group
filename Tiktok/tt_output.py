@@ -2,7 +2,7 @@ import asyncio
 from concurrent.futures import ProcessPoolExecutor
 
 from TG_bot.src.telegram.messages.user_msg import ProcessActions
-from database.query.tt_work import db_add_downloaded_video
+from database.query.btns_main_menu import db_add_downloaded_video
 from database.tables import TikTokUser
 from link_for_Download import TiktokDownloader
 

@@ -13,7 +13,7 @@ from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
 from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpInstaMessages, SetUpTikTokMessages, \
     SetUpTelegramMessages, ErrorMessages, ProcessActions
-from database.query.tt_work import db_get_tt_name_by_tg_id
+from database.query.btns_main_menu import db_get_tt_name_by_tg_id
 from database.query.users import get_user_by_tg_id
 
 from Tiktok import run_process_tt
@@ -85,7 +85,7 @@ async def setup_social_network(message: Message,  state: FSMContext):
         await message.reply(SetUpInstaMessages['quest_insta_login'], reply_markup=one_btn(MESSAGES['back']))
 
     elif message.text == MESSAGES['settings_btn_list'][2]:  # SetUP Telegram
-        await state.set_state(SetUpTelegram.api_id)
+        await state.set_state(SetUpTelegram.link_your_chanel)
         await message.reply(SetUpTelegramMessages['quest_telegram_id'], reply_markup=one_btn(MESSAGES['back']))
 
     elif message.text == MESSAGES['settings_btn_list'][3]:  # <<< Back

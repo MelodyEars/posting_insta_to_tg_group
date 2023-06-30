@@ -1,26 +1,23 @@
 
 from typing import NamedTuple
 
-from loguru import logger
-
 from aiogram import F
-from aiogram.types import Message
+from aiogram.types import Message, Chat
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 
-from TG_bot.setup import user_router
+from TG_bot.setup import user_router, bot
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
 from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpTelegramMessages
+from database.query.set_up_social_network import db_add_tg_groupname
 
 
 class SetUpTelegram(StatesGroup):
-    api_id = State()
-    api_hash = State()
+    link_your_chanel = State()
 
 
 class StructData(NamedTuple):
-    api_id: str
-    api_hash: str
+    link_your_chanel: str
 
 
 @user_router.message(F.text == MESSAGES['back'])
@@ -37,23 +34,20 @@ async def cancel_handler(message: Message, state: FSMContext):
     )
 
 
-@user_router.message(SetUpTelegram.api_id)
+@user_router.message(SetUpTelegram.link_your_chanel)
 async def answer_login(message: Message, state: FSMContext):
-    await state.set_state(SetUpTelegram.api_hash)
+    await state.set_state(SetUpTelegram.link_your_chanel)
     await state.update_data(api_id=message.text)
 
     await message.reply(SetUpTelegramMessages['quest_telegram_id'], reply_markup=one_btn(MESSAGES['back']))
 
-
-@user_router.message(SetUpTelegram.api_hash)
-async def answer_password(message: Message, state: FSMContext):
-    await state.update_data(api_hash=message.text)
-
     data = await state.get_data()
     struct_data = StructData(**data)
 
-    logger.info(struct_data.api_id)
-    logger.info(struct_data.api_hash)
+    link_your_chanel = struct_data.link_your_chanel
+    result: Chat = await bot.get_chat(link_your_chanel)
+    chat_id = result.id
+    db_add_tg_groupname(group_chat_id=chat_id, id_telegram=message.from_user.id)
 
     await state.clear()
     await message.reply(

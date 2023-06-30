@@ -2,6 +2,7 @@ from SETTINGS import db
 from database.tables import TikTokVideo, TikTokUser, User
 
 
+# _________________________________________________________________________________ TikTok
 def db_get_tt_name_by_tg_id(telegram_id) -> TikTokUser or None:
     with db:
         try:

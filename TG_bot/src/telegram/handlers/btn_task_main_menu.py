@@ -4,7 +4,7 @@ from aiogram.types import Message, FSInputFile
 from TG_bot.setup import bot
 from TG_bot.src.telegram.messages.user_msg import ProcessActions
 from Tiktok import run_process_tt
-from database.query.tt_work import db_get_not_uploaded_videos
+from database.query.btns_main_menu import db_get_not_uploaded_videos
 from database.tables import TikTokUser, TikTokVideo
 
 

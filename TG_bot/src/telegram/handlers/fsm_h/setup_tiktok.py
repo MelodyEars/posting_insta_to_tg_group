@@ -10,6 +10,7 @@ from aiogram.fsm.state import State, StatesGroup
 from TG_bot.setup import user_router
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
 from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpTikTokMessages
+from database.query.set_up_social_network import db_create_TT_user
 
 
 class SetUpTikTok(StatesGroup):
@@ -19,7 +20,6 @@ class SetUpTikTok(StatesGroup):
 
 class StructData(NamedTuple):
     tiktok_login: str
-    tiktok_password: str
 
 
 @user_router.message(F.text == MESSAGES['back'])
@@ -43,16 +43,13 @@ async def answer_login(message: Message, state: FSMContext):
 
     await message.reply(SetUpTikTokMessages['quest_tiktok_password'], reply_markup=one_btn(MESSAGES['back']))
 
-
-@user_router.message(SetUpTikTok.tiktok_password)
-async def answer_password(message: Message, state: FSMContext):
-    await state.update_data(tiktok_password=message.text)
-
     data = await state.get_data()
     struct_data = StructData(**data)
 
-    logger.info(struct_data.tiktok_login)
-    logger.info(struct_data.tiktok_password)
+    # Add to DB
+    tg_id = message.chat.id
+    new_login_tt = struct_data.tiktok_login
+    db_create_TT_user(username=new_login_tt, id_telegram=tg_id)
 
     await state.clear()
     await message.reply(
