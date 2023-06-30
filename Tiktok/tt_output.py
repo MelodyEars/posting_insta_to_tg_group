@@ -31,5 +31,5 @@ def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
 
 
 async def run_process_tt(obj_tiktok_user: TikTokUser, all_video=False):
-    with ProcessPoolExecutor as executor:
+    with ProcessPoolExecutor() as executor:
         await asyncio.get_running_loop().run_in_executor(executor, get_video_from_tiktok, obj_tiktok_user, all_video)

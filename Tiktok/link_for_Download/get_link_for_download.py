@@ -71,7 +71,7 @@ class TiktokDownloader(BaseClass):
         link_video = self.elem_exists('//div[@id="target"]//a', wait=120, return_xpath=True).get_attribute("href")
 
         # get info about video(name, hashtag)
-        name = self.elem_exists('p.maintext', by=By.CSS_SELECTOR, wait=120).text()
+        name = self.elem_exists('p.maintext', by=By.CSS_SELECTOR, wait=120, return_xpath=True).text
 
         video_path: Path = self.download_video(link_video, video_num)
 
