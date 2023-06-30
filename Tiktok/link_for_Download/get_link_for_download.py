@@ -13,6 +13,7 @@ from selenium.webdriver.common.by import By
 from Tiktok.Settings_Selenium import BaseClass
 from SETTINGS import TIKTOK_BROWSER_HEADLESS
 
+
 class TiktokDownloader(BaseClass):
     def __init__(self, tt_name: str, proxy=None):
         super().__init__()

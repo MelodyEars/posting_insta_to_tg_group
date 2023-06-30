@@ -16,9 +16,9 @@ def db_get_tt_name_by_tg_id(telegram_id: int) -> TikTokUser or None:
             return None
 
 
-def db_add_downloaded_video(video_records: list[dict]):
+def db_add_downloaded_video(video_record: dict):
     with db:
-        TikTokVideo.insert_many(video_records).execute()
+        TikTokVideo.create(**video_record)
 
 
 def db_get_not_uploaded_videos() -> list[TikTokVideo]:

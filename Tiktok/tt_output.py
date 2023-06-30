@@ -7,13 +7,13 @@ from .link_for_Download import TiktokDownloader
 
 
 def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
-    video_records = []
+
     tt_name = obj_tiktok_user.username
     print(f"tt_name: {tt_name}")
     with TiktokDownloader(tt_name=tt_name) as api:
 
         if not all_video:
-            list_videos = api.get_all_video_by_tiktokname()  # get latest video
+            list_videos = [api.get_all_video_by_tiktokname()[0]]  # get latest video
         else:
             list_videos = api.get_all_video_by_tiktokname(scroll=True)
 
@@ -25,11 +25,9 @@ def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
                 'name_video': name_video,
                 'path_video': video_path
             }
-            video_records.append(video_record)
+            db_add_downloaded_video(video_record)
 
         api.DRIVER.quit()
-
-    db_add_downloaded_video(video_records)
 
 
 async def run_process_tt(obj_tiktok_user: TikTokUser, all_video=False):
