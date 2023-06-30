@@ -35,8 +35,6 @@ def db_update_uploaded_video(video: TikTokVideo):
 
 def db_get_all_videos_numbers(tt_user_obj: TikTokUser) -> list[int]:
     with db:
-        print(f"tt_user_obj {tt_user_obj.tg_id_user}")
         videos_objs = TikTokVideo.select().where(TikTokVideo.tiktok_user == tt_user_obj)
-        print(f"videos objs {videos_objs}")
         list_video_number = [obj_video.number_video for obj_video in videos_objs]
         return list_video_number
