@@ -50,3 +50,4 @@ Check Telegram and
 begin_download = 'Start download'
 download_success = 'Download successfully!'
 sent_success = 'Sent to your channel!'
+same_video = "Some videos were uploaded to the telegram channel"

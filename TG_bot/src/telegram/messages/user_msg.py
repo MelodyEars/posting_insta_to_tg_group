@@ -83,10 +83,12 @@ class ProcessActions(TypedDict):
     begin_download: str
     download_success: str
     sent_success: str
+    same_video: str
 
 
 ProcessActions: ProcessActions = {
     'begin_download': begin_download,
     'download_success': download_success,
     'sent_success': sent_success,
+    'same_video': same_video,
 }

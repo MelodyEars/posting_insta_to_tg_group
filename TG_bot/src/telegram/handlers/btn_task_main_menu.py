@@ -23,8 +23,8 @@ async def tiktok_btn_task(message: Message, obj_tiktok_user: TikTokUser, group_c
 
     # run browser and add downloaded video to db
     msg = await run_process_tt(obj_tiktok_user)
+    await message.answer(msg)
     if msg != ProcessActions['sent_success']:
-        await message.answer(msg)
         return
 
     await message.answer(ProcessActions['download_success'])
