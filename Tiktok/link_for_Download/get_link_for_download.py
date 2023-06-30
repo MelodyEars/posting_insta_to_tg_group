@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 
 from Tiktok.Settings_Selenium import BaseClass
-
+from SETTINGS import TIKTOK_BROWSER_HEADLESS
 
 class TiktokDownloader(BaseClass):
     def __init__(self, tt_name: str, proxy=None):
@@ -20,7 +20,7 @@ class TiktokDownloader(BaseClass):
         self.proxy = proxy
 
     def __enter__(self):
-        self.DRIVER = self.run_driver(proxy=self.proxy, headless=True)
+        self.DRIVER = self.run_driver(proxy=self.proxy, headless=TIKTOK_BROWSER_HEADLESS)
 
         return self
 

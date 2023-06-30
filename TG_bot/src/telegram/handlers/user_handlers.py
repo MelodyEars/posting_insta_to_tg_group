@@ -55,7 +55,7 @@ async def starter_work(message: Message):
     elif message.text == MESSAGES['main_btn_list'][1]:  # TikTok
         # TODO check status for download all videos
         # TODO check number of videos in db and then add to db
-
+        # TODO check if empty message in handler for setup
         obj_tiktok_user = db_get_tt_name_by_tg_id(message.from_user.id)
         group_chat_id = get_user_by_tg_id(message.from_user.id).group_chat_id
 

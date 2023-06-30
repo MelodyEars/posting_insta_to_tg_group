@@ -16,3 +16,7 @@ set_database = {
                     }
 
 db = pw.PostgresqlDatabase('telegram_database_insta_tt', **set_database)
+
+
+# Browsers settings
+TIKTOK_BROWSER_HEADLESS = True
