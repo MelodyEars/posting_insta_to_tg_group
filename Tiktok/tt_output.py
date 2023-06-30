@@ -10,6 +10,7 @@ from .link_for_Download import TiktokDownloader
 def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
     message = ProcessActions['sent_success']
     list_number_videos = db_get_all_videos_numbers(obj_tiktok_user)
+    print(f"list number video {list_number_videos}")
     tt_name = obj_tiktok_user.username
 
     with TiktokDownloader(tt_name=tt_name) as api:
@@ -19,6 +20,8 @@ def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
             list_videos = api.get_all_video_by_tiktokname(scroll=True)
 
         for video_num in list_videos:
+            print(f"{video_num} in {list_number_videos}")
+            print(f"type {type(video_num)}, type in list {type(list_number_videos[0])}")
             if video_num not in list_number_videos:
                 name_video, video_path = api.get_info_video(video_num)
                 video_record = {
