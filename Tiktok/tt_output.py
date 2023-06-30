@@ -1,10 +1,9 @@
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
 
-from TG_bot.src.telegram.messages.user_msg import ProcessActions
 from database.query.btns_main_menu import db_add_downloaded_video
 from database.tables import TikTokUser
-from link_for_Download import TiktokDownloader
+from .link_for_Download import TiktokDownloader
 
 
 def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):

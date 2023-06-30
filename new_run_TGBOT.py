@@ -1,5 +1,7 @@
 import asyncio
 
+import work_fs as wf
+
 from loguru import logger
 
 from aiogram import Bot
@@ -15,6 +17,7 @@ from TG_bot.src.telegram.middleware.admin_only import AdminOnly
 from TG_bot.src.telegram.middleware.check_users import CheckUser
 from TG_bot.src.telegram.handlers.admin_handlers import admin_router
 from TG_bot.src.telegram.handlers.user_handlers import user_router
+
 
 
 async def _start():
@@ -65,12 +68,12 @@ def main():
 
 
 if __name__ == '__main__':
-	# logger.add(
-	# 	wf.auto_create(wf.path_near_exefile("logs"), _type="dir") / "TgBot.log",
-	# 	format="{time} {level} {message}",
-	# 	level="INFO",
-	# 	rotation="10 MB",
-	# 	compression="zip"
-	# )
+	logger.add(
+		wf.auto_create(wf.path_near_exefile("logs"), _type="dir") / "TgBot.log",
+		format="{time} {level} {message}",
+		level="INFO",
+		rotation="10 MB",
+		compression="zip"
+	)
 
 	main()
