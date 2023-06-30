@@ -41,8 +41,6 @@ async def answer_login(message: Message, state: FSMContext):
     await state.set_state(SetUpTikTok.tiktok_password)
     await state.update_data(tiktok_login=message.text)
 
-    await message.reply(SetUpTikTokMessages['quest_tiktok_password'], reply_markup=one_btn(MESSAGES['back']))
-
     data = await state.get_data()
     struct_data = StructData(**data)
 

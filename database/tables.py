@@ -35,7 +35,7 @@ class TikTokUser(BaseModel):
 
 class TikTokVideo(BaseModel):
 
-    tiktok_user = pw.ForeignKeyField(TikTokUser, backref="tiktok_users", on_delete='СASCADE')
+    tiktok_user = pw.ForeignKeyField(TikTokUser, backref="tiktok_users", on_delete='CASCADE')
     number_video = pw.IntegerField(unique=True)
     name_video = pw.CharField()
     path_video = pw.CharField()

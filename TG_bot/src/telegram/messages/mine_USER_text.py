@@ -32,12 +32,10 @@ success = 'Successfully!'
 # ______________________________________________ Questions Setup tiktok ________________________________________________
 
 quest_tiktok_login = 'Enter your login for TikTok'
-quest_tiktok_password = 'Enter your password for TikTok'
 
 # ______________________________________________ Questions Setup telegram _____________________________________________
 
-quest_telegram_id = 'Enter your api id for Telegram'
-quest_telegram_hash = 'Enter your api hash for Telegram'
+nickname_chanel = 'Enter your nickname chanel as @chanel_name'
 
 
 # ______________________________________________ Handling Error _____________________________________________
