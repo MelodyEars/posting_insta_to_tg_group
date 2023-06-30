@@ -14,7 +14,7 @@ async def send_msg_from_db_to_chat(group_chat_id: int):
 
     for obj_video in obj_for_send:
         video_from_pc = FSInputFile(obj_video.path_video)
-        await bot.send_video(chat_id=group_chat_id, photo=video_from_pc, caption=obj_video.name_video)
+        await bot.send_video(chat_id=group_chat_id, video=video_from_pc, caption=obj_video.name_video)
         db_update_uploaded_video(obj_video)
 
 
@@ -22,7 +22,11 @@ async def tiktok_btn_task(message: Message, obj_tiktok_user: TikTokUser, group_c
     await message.answer(ProcessActions['begin_download'], )
 
     # run browser and add downloaded video to db
-    await run_process_tt(obj_tiktok_user)
+    msg = await run_process_tt(obj_tiktok_user)
+    if msg != ProcessActions['sent_success']:
+        await message.answer(msg)
+        return
+
     await message.answer(ProcessActions['download_success'])
     # send video to telegram chat
     await send_msg_from_db_to_chat(group_chat_id)

@@ -57,6 +57,7 @@ async def starter_work(message: Message):
         # TODO check number of videos in db and then add to db
         # TODO check if empty message in handler for setup
         # TODO tiktokapi not have video on tiktok page
+
         obj_tiktok_user = db_get_tt_name_by_tg_id(message.from_user.id)
         group_chat_id = get_user_by_tg_id(message.from_user.id).group_chat_id
 
