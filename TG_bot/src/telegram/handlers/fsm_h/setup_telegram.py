@@ -37,16 +37,17 @@ async def cancel_handler(message: Message, state: FSMContext):
 @user_router.message(SetUpTelegram.link_your_chanel)
 async def answer_login(message: Message, state: FSMContext):
     await state.set_state(SetUpTelegram.link_your_chanel)
-    await state.update_data(api_id=message.text)
-
-    await message.reply(SetUpTelegramMessages['quest_telegram_id'], reply_markup=one_btn(MESSAGES['back']))
+    await state.update_data(link_your_chanel=message.text)
 
     data = await state.get_data()
     struct_data = StructData(**data)
 
     link_your_chanel = struct_data.link_your_chanel
     result: Chat = await bot.get_chat(link_your_chanel)
+    print(f"Result {result}")
     chat_id = result.id
+    print(f"Chat id {chat_id}")
+    # TODO handling error aiogram.exceptions.TelegramBadRequest if link on the chat
     db_add_tg_groupname(group_chat_id=chat_id, id_telegram=message.from_user.id)
 
     await state.clear()

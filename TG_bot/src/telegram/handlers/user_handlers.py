@@ -57,13 +57,13 @@ async def starter_work(message: Message):
         # TODO check number of videos in db and then add to db
 
         if (
-                (obj_tiktok_user := db_get_tt_name_by_tg_id(message.from_user.id)) and
-                (group_chat_id := get_user_by_tg_id(message.from_user.id).group_chat_id is not None)
+                (obj_tiktok_user := db_get_tt_name_by_tg_id(message.from_user.id))
+                and (group_chat_id := get_user_by_tg_id(message.from_user.id).group_chat_id) is not None
         ):
             tt_btn = asyncio.create_task(tiktok_btn_task(message, obj_tiktok_user, group_chat_id))
             await tt_btn
         else:
-            await message.answer(ErrorMessages['request_attend_settings'] + 'Tiktok',)
+            await message.answer(ErrorMessages['request_attend_settings'] + 'Tiktok')
             # Todo add inline-button for setup tiktok and telegram
 
     elif message.text == MESSAGES['main_btn_list'][2]:  # Settings
@@ -86,7 +86,7 @@ async def setup_social_network(message: Message,  state: FSMContext):
 
     elif message.text == MESSAGES['settings_btn_list'][2]:  # SetUP Telegram
         await state.set_state(SetUpTelegram.link_your_chanel)
-        await message.reply(SetUpTelegramMessages['quest_telegram_id'], reply_markup=one_btn(MESSAGES['back']))
+        await message.reply(SetUpTelegramMessages['nickname_chanel'], reply_markup=one_btn(MESSAGES['back']))
 
     elif message.text == MESSAGES['settings_btn_list'][3]:  # <<< Back
         await message.answer(

@@ -19,7 +19,6 @@ from TG_bot.src.telegram.handlers.admin_handlers import admin_router
 from TG_bot.src.telegram.handlers.user_handlers import user_router
 
 
-
 async def _start():
 	admin_router.message.middleware(AdminOnly())
 	user_router.message.middleware(CheckUser())

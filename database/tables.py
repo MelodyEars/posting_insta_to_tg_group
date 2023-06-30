@@ -15,7 +15,7 @@ class BaseModel(pw.Model):
 class User(BaseModel):
     id_telegram = pw.IntegerField(unique=True)
     status_user = pw.CharField(default='regular_user')
-    group_chat_id = pw.IntegerField(default=None, null=True)
+    group_chat_id = pw.BigIntegerField(default=None, null=True)
     date_registration = pw.DateTimeField(default=datetime.now)
     date_paid = pw.DateTimeField(default=None, null=True)
     date_end_paid = pw.DateTimeField(default=None, null=True)
