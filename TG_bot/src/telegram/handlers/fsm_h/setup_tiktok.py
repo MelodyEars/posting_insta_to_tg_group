@@ -47,7 +47,7 @@ async def answer_login(message: Message, state: FSMContext):
     # Add to DB
     tg_id = message.chat.id
     new_login_tt = struct_data.tiktok_login
-    db_create_TT_user(username=new_login_tt, id_telegram=tg_id)
+    db_create_TT_user(tt_username=new_login_tt, id_telegram=tg_id)
 
     await state.clear()
     await message.reply(
