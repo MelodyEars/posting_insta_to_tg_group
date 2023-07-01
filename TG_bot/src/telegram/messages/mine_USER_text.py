@@ -41,9 +41,9 @@ send_username = 'PLease, send your chanel username as @chanel_username'
 
 # ______________________________________________ Handling Error _____________________________________________
 request_attend_settings = '''
-Please, set up your social networks first. \n
-Click settings and follow the steps. \n
-Check Telegram and 
+Please, set up your social networks first.
+Click settings and follow the steps. 
+Check Telegram or 
 '''
 
 # ______________________________________________ Process Actions _____________________________________________

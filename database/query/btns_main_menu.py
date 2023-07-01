@@ -1,14 +1,14 @@
 from peewee import DoesNotExist
 
 from SETTINGS import db
-from database.tables import TikTokVideo, TikTokUser, User
+from database.tables import TikTokVideo, TikTokUser, TelegramUser
 
 
 # _________________________________________________________________________________ TikTok
-def db_get_tt_name_by_tg_id(telegram_id: int) -> TikTokUser or None:
+def db_get_tt_name_by_tg_id(tg_chat_id: int) -> TikTokUser or None:
     with db:
         try:
-            user = User.get(User.id_telegram == telegram_id)
+            user = TelegramUser.get(chat_id_user=tg_chat_id)
             # tiktok_user: TikTokUser = TikTokUser.get_or_none(TikTokUser.tg_id_user == user)
             tiktok_user = user.users.first()
             return tiktok_user

@@ -12,20 +12,25 @@ class BaseModel(pw.Model):
         database = db
 
 
-class User(BaseModel):
-    id_telegram = pw.IntegerField(unique=True)
-    status_user = pw.CharField(default='regular_user')
+class TelegramUser(BaseModel):
+    tg_username = pw.CharField(max_length=100, null=True)
+    chat_id_user = pw.BigIntegerField(unique=True)
+
+    group_name_chat = pw.BigIntegerField(default=None, null=True)
     group_chat_id = pw.BigIntegerField(default=None, null=True)
+
+    status_user = pw.CharField(default='regular_user')
+
     date_registration = pw.DateTimeField(default=datetime.now)
     date_paid = pw.DateTimeField(default=None, null=True)
     date_end_paid = pw.DateTimeField(default=None, null=True)
 
     class Meta:
-        db_table = 'users'
+        db_table = 'telegram_users'
 
 
 class TikTokUser(BaseModel):
-    tg_id_user = pw.ForeignKeyField(User, backref="users", on_delete='CASCADE')
+    tg_id_user = pw.ForeignKeyField(TelegramUser, backref="telegram_users", on_delete='CASCADE')
     username = pw.CharField(max_length=100, null=True, default=None)
     access_tg_user = pw.BooleanField(default=True)
     autoposting_tt = pw.BooleanField(default=False)
@@ -48,4 +53,4 @@ class TikTokVideo(BaseModel):
 
 
 def create_tables_user_tg():
-    db.create_tables([User, TikTokUser, TikTokVideo])
+    db.create_tables([TelegramUser, TikTokUser, TikTokVideo])

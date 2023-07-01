@@ -21,7 +21,7 @@ from database.tables import TikTokUser
 
 @user_router.message(Command(commands='start'))
 async def start(message: Message):
-    db_add_user(int_id_tg=message.from_user.id)
+    db_add_user(chat_id_user=message.chat.id, tg_username=message.from_user.username)
 
     await message.reply(
         MESSAGES['start_message'],
@@ -53,8 +53,8 @@ async def starter_work(message: Message):
     if message.text == MESSAGES['main_btn_list'][0]:  # TikTok
         # TODO tiktokapi not have video on tiktok page
 
-        obj_tiktok_user: TikTokUser = db_get_tt_name_by_tg_id(message.from_user.id)
-        group_chat_id = get_user_by_tg_id(message.from_user.id).group_chat_id
+        obj_tiktok_user: TikTokUser = db_get_tt_name_by_tg_id(message.chat.id)
+        group_chat_id = get_user_by_tg_id(message.chat.id).group_chat_id
 
         if obj_tiktok_user is not None and group_chat_id is not None:
             if not obj_tiktok_user.autoposting_tt:

@@ -57,7 +57,7 @@ async def answer_login(message: Message, state: FSMContext):
         chat_id = result.id
         print(f"Chat id {chat_id}")
 
-        db_add_tg_groupname(group_chat_id=chat_id, id_telegram=message.from_user.id)
+        db_add_tg_groupname(group_chat_id=chat_id, id_chat_user=message.chat.id, group_name_chat=link_your_chanel)
 
     except TelegramBadRequest:
         await cancel_handler(message, state, SetUpTelegramMessages['send_username'])
