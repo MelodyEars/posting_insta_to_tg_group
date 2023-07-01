@@ -10,7 +10,7 @@ def db_get_tt_name_by_tg_id(tg_chat_id: int) -> TikTokUser or None:
         try:
             user = TelegramUser.get(chat_id_user=tg_chat_id)
             # tiktok_user: TikTokUser = TikTokUser.get_or_none(TikTokUser.tg_id_user == user)
-            tiktok_user = user.users.first()
+            tiktok_user = user.telegram_users.first()
             return tiktok_user
         except DoesNotExist:
             return None
