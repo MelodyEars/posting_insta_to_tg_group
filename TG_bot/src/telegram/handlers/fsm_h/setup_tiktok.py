@@ -15,7 +15,6 @@ from database.query.set_up_social_network import db_create_TT_user
 
 class SetUpTikTok(StatesGroup):
     tiktok_login = State()
-    tiktok_password = State()
 
 
 class StructData(NamedTuple):
@@ -23,14 +22,14 @@ class StructData(NamedTuple):
 
 
 @user_router.message(F.text == MESSAGES['back'])
-async def cancel_handler(message: Message, state: FSMContext):
+async def cancel_handler(message: Message, state: FSMContext, text='ㅤ'):
     current_state = await state.get_state()
     if current_state is None:
         return
 
     await state.clear()
     await message.reply(
-        'ㅤ',
+        text,
         reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
                                txt_input_field=MESSAGES['settings_input_field'])
     )
@@ -38,9 +37,12 @@ async def cancel_handler(message: Message, state: FSMContext):
 
 @user_router.message(SetUpTikTok.tiktok_login)
 async def answer_login(message: Message, state: FSMContext):
-    await state.set_state(SetUpTikTok.tiktok_password)
+    msg_text = message.text.replace("\n", "").replace(" ", "")
+    if msg_text == "":
+        # if empty request
+        await cancel_handler(message, state, MESSAGES['empty_request'])
+        return
     await state.update_data(tiktok_login=message.text)
-
     data = await state.get_data()
     struct_data = StructData(**data)
 

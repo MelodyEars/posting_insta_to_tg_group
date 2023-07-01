@@ -9,7 +9,7 @@ start_message = hi_user + '\n' + help_message
 
 # ________________________________________ Buttons and input fields for user ________________________________________
 back = '<<< Back'
-
+empty_request = 'Please, enter something'
 # _____________________________________________________________________________________ main btns
 main_btn_list = ['Instagram', 'TikTok', 'Settings']
 main_input_field = 'Choose one for start'
@@ -36,6 +36,7 @@ quest_tiktok_login = 'Enter your login for TikTok'
 # ______________________________________________ Questions Setup telegram _____________________________________________
 
 nickname_chanel = 'Enter your nickname chanel as @chanel_name'
+send_username = 'PLease, send your chanel username as @chanel_username'
 
 
 # ______________________________________________ Handling Error _____________________________________________
@@ -44,7 +45,6 @@ Please, set up your social networks first. \n
 Click settings and follow the steps. \n
 Check Telegram and 
 '''
-
 
 # ______________________________________________ Process Actions _____________________________________________
 begin_download = 'Start download'

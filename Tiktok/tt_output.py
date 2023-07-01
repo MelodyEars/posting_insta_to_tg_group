@@ -22,8 +22,9 @@ def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
         for video_num in list_videos:
             print(f"{video_num} in {list_number_videos}")
             print(f"type {type(video_num)}, type in list {type(list_number_videos[0])}")
-            if video_num not in list_number_videos:
+            if int(video_num) not in list_number_videos:
                 name_video, video_path = api.get_info_video(video_num)
+
                 video_record = {
                     'tiktok_user': obj_tiktok_user,
                     'number_video': video_num,

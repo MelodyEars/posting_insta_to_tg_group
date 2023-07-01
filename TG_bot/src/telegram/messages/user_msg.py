@@ -12,6 +12,7 @@ class Messages(TypedDict):
     settings_btn_list: list
     settings_input_field: str
     back: str
+    empty_request: str
 
 
 MESSAGES: Messages = {
@@ -25,6 +26,7 @@ MESSAGES: Messages = {
     'settings_btn_list': settings_btn_list,
     'settings_input_field': settings_input_field,
 
+    'empty_request': empty_request,
     'back': back
 }
 
@@ -59,12 +61,14 @@ SetUpTikTokMessages: SetUpTikTokMessages = {
 # ______________________________________________ Questions Setup telegram _____________________________________________
 class SetUpTelegramMessages(TypedDict):
     nickname_chanel: str
+    send_username: str
     success: str
 
 
 SetUpTelegramMessages: SetUpTelegramMessages = {
     'nickname_chanel': nickname_chanel,
-    'success': success
+    'send_username': send_username,
+    'success': success,
 }
 
 
