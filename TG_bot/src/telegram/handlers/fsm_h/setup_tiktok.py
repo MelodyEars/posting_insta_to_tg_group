@@ -42,6 +42,7 @@ async def answer_login(message: Message, state: FSMContext):
         # if empty request
         await cancel_handler(message, state, MESSAGES['empty_request'])
         return
+
     await state.update_data(tiktok_login=message.text)
     data = await state.get_data()
     struct_data = StructData(**data)

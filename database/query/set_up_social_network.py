@@ -5,8 +5,8 @@ from database.tables import TelegramUser, TikTokUser
 # _______________________________________________________________________________ TIKTOK
 def db_create_TT_user(tt_username: str, id_chat_user: int):
     with db:
-        user: TelegramUser = TelegramUser.get_or_none(chat_id_user=id_chat_user)
-        obj_tt_user, created, = TikTokUser.get_or_create(tg_id_user=user, username=tt_username)
+        user: TelegramUser = TelegramUser.get(chat_id_user=id_chat_user)
+        obj_tt_user, created, = TikTokUser.get_or_create(tg_id_user=user)
 
         obj_tt_user.username = tt_username
         obj_tt_user.save()
