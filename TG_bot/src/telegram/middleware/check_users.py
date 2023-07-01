@@ -14,5 +14,5 @@ class CheckUser(BaseMiddleware):
     ) -> Any:
         # allowed_users = db_get_access_id_users()
         # if event.from_user.id in allowed_users:
-        #     return await handler(event, data)
-        pass
+        return await handler(event, data)
+
