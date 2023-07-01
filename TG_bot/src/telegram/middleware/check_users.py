@@ -13,6 +13,6 @@ class CheckUser(BaseMiddleware):
         data: dict[str, Any]
     ) -> Any:
         # allowed_users = db_get_access_id_users()
-        # if event.from_user.id in allowed_users:
+        # allowed_users = []
+        # if event.from_user.id not in allowed_users:
         return await handler(event, data)
-
