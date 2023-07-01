@@ -1,4 +1,3 @@
-import asyncio
 
 from aiogram import F
 from aiogram.fsm.context import FSMContext
@@ -7,21 +6,22 @@ from aiogram.filters import Command
 
 from TG_bot.setup import user_router
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns, one_inline_btn
-from TG_bot.src.telegram.handlers.btn_task_main_menu import tiktok_btn_task
 from TG_bot.src.telegram.handlers.fsm_h.setup_instagram import SetUpInstagram
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
-from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpInstaMessages, SetUpTikTokMessages, \
-    SetUpTelegramMessages, ErrorMessages, ProcessActions
+from TG_bot.src.telegram.messages.user_msg import (MESSAGES, SetUpInstaMessages, SetUpTikTokMessages,
+                                                   SetUpTelegramMessages, ErrorMessages)
 from database.query.btns_main_menu import db_get_tt_name_by_tg_id
+from database.query.registration import db_add_user
 from database.query.users import get_user_by_tg_id
 
-from Tiktok import run_thread_tt
 from database.tables import TikTokUser
 
 
 @user_router.message(Command(commands='start'))
 async def start(message: Message):
+    db_add_user(int_id_tg=message.from_user.id)
+
     await message.reply(
         MESSAGES['start_message'],
         reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
