@@ -28,6 +28,7 @@ class TikTokUser(BaseModel):
     tg_id_user = pw.ForeignKeyField(User, backref="users", on_delete='CASCADE')
     username = pw.CharField(max_length=100, null=True, default=None)
     access_tg_user = pw.BooleanField(default=True)
+    autoposting_tt = pw.BooleanField(default=False)
 
     class Meta:
         db_table = 'tiktok_users'

@@ -37,7 +37,7 @@ async def cancel_handler(message: Message, state: FSMContext, text='ㅤ'):
 
 @user_router.message(SetUpTikTok.tiktok_login)
 async def answer_login(message: Message, state: FSMContext):
-    msg_text = message.text.replace("\n", "").replace(" ", "")
+    msg_text = message.text.replace("\n", "").replace(" ", "").replace("@", "")
     if msg_text == "":
         # if empty request
         await cancel_handler(message, state, MESSAGES['empty_request'])

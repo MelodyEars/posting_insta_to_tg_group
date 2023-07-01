@@ -1,5 +1,5 @@
 import asyncio
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 
 from TG_bot.src.telegram.messages.user_msg import ProcessActions
 from database.query.btns_main_menu import db_add_downloaded_video, db_get_all_videos_numbers
@@ -41,8 +41,8 @@ def get_video_from_tiktok(obj_tiktok_user: TikTokUser, all_video=False):
     return message
 
 
-async def run_process_tt(obj_tiktok_user: TikTokUser, all_video=False):
-    with ProcessPoolExecutor() as executor:
+async def run_thread_tt(obj_tiktok_user: TikTokUser, all_video=False):
+    with ThreadPoolExecutor() as executor:
         msg = await asyncio.get_running_loop().run_in_executor(executor, get_video_from_tiktok, obj_tiktok_user,
                                                                all_video)
 

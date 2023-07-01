@@ -6,7 +6,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 
 from TG_bot.setup import user_router
-from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
+from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns, one_inline_btn
 from TG_bot.src.telegram.handlers.btn_task_main_menu import tiktok_btn_task
 from TG_bot.src.telegram.handlers.fsm_h.setup_instagram import SetUpInstagram
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
@@ -16,7 +16,8 @@ from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpInstaMessages, 
 from database.query.btns_main_menu import db_get_tt_name_by_tg_id
 from database.query.users import get_user_by_tg_id
 
-from Tiktok import run_process_tt
+from Tiktok import run_thread_tt
+from database.tables import TikTokUser
 
 
 @user_router.message(Command(commands='start'))
@@ -48,28 +49,29 @@ async def back_handl(message: Message):
 
 @user_router.message(F.text.in_(MESSAGES['main_btn_list']))
 async def starter_work(message: Message):
-    if message.text == MESSAGES['main_btn_list'][0]:  # Instagram
-        await message.answer('Unfortunately, this feature is not available yet',)
-        # TODO create task
-
-    elif message.text == MESSAGES['main_btn_list'][1]:  # TikTok
-        # TODO check status for download all videos
-        # TODO check number of videos in db and then add to db
-        # TODO check if empty message in handler for setup
+    if message.text == MESSAGES['main_btn_list'][0]:  # TikTok
         # TODO tiktokapi not have video on tiktok page
 
-        obj_tiktok_user = db_get_tt_name_by_tg_id(message.from_user.id)
+        obj_tiktok_user: TikTokUser = db_get_tt_name_by_tg_id(message.from_user.id)
         group_chat_id = get_user_by_tg_id(message.from_user.id).group_chat_id
 
         if obj_tiktok_user is not None and group_chat_id is not None:
-            tt_btn = asyncio.create_task(tiktok_btn_task(message, obj_tiktok_user, group_chat_id))
-            await tt_btn
+            if not obj_tiktok_user.autoposting_tt:
+                # still not run autoposting
+                one_inline_btn("Run autoposting", "start_tt_auto")
+
+            else:
+                # already run autoposting
+                one_inline_btn("Turn OFF autoposting", "end_tt_auto")
+
+            # tt_btn = asyncio.create_task(tiktok_btn_task(message, obj_tiktok_user, group_chat_id))
+            # await tt_btn
 
         else:
             await message.answer(ErrorMessages['request_attend_settings'] + 'Tiktok')
             # Todo add inline-button for setup tiktok and telegram
 
-    elif message.text == MESSAGES['main_btn_list'][2]:  # Settings
+    elif message.text == MESSAGES['main_btn_list'][1]:  # Settings
         await message.answer(
             'ㅤ',
             reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],

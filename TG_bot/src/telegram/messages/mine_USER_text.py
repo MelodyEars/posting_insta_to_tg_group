@@ -11,7 +11,7 @@ start_message = hi_user + '\n' + help_message
 back = '<<< Back'
 empty_request = 'Please, enter something'
 # _____________________________________________________________________________________ main btns
-main_btn_list = ['Instagram', 'TikTok', 'Settings']
+main_btn_list = ['TikTok', 'Settings']
 main_input_field = 'Choose one for start'
 
 # _____________________________________________________________________________________ settings btns
@@ -51,3 +51,5 @@ begin_download = 'Start download'
 download_success = 'Download successfully!'
 sent_success = 'Sent to your channel!'
 same_video = "Some videos were uploaded to the telegram channel"
+start_autoposting = 'Start autoposting'
+stop_autoposting = 'Stop autoposting'

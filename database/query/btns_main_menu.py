@@ -38,3 +38,16 @@ def db_get_all_videos_numbers(tt_user_obj: TikTokUser) -> list[int]:
         videos_objs = TikTokVideo.select().where(TikTokVideo.tiktok_user == tt_user_obj)
         list_video_number = [obj_video.number_video for obj_video in videos_objs]
         return list_video_number
+
+
+def db_upd_status_autoposting_tt(tt_user_obj: TikTokUser, status: bool):
+    with db:
+        tt_user_obj.autoposting_tt = status
+        tt_user_obj.save()
+
+
+def db_get_status_autopsting(tt_user_obj: TikTokUser) -> bool:
+    with db:
+        obj_tt_user = TikTokVideo.get_by_id(tt_user_obj.id)
+        return obj_tt_user.autoposting_tt
+

@@ -88,6 +88,8 @@ class ProcessActions(TypedDict):
     download_success: str
     sent_success: str
     same_video: str
+    start_autoposting: str
+    stop_autoposting: str
 
 
 ProcessActions: ProcessActions = {
@@ -95,4 +97,6 @@ ProcessActions: ProcessActions = {
     'download_success': download_success,
     'sent_success': sent_success,
     'same_video': same_video,
+    'start_autoposting': start_autoposting,
+    'stop_autoposting': stop_autoposting
 }
