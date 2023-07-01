@@ -31,7 +31,7 @@ success = 'Successfully!'
 
 # ______________________________________________ Questions Setup tiktok ________________________________________________
 
-quest_tiktok_login = 'Enter your login for TikTok'
+quest_tiktok_login = 'Enter your login for TikTok(without @)'
 
 # ______________________________________________ Questions Setup telegram _____________________________________________
 
