@@ -56,15 +56,15 @@ async def starter_work(message: Message):
         group_chat_id = get_user_by_tg_id(message.from_user.id).group_chat_id
 
         if obj_tiktok_user is not None and group_chat_id is not None:
-            print('obj_tiktok_user is not None and group_chat_id is not None')
             if not obj_tiktok_user.autoposting_tt:
                 # still not run autoposting
-                print('still not run autoposting')
-                one_inline_btn("Run autoposting", "start_tt_auto")
+                builder = one_inline_btn("Run autoposting", "start_tt_auto")
+                await message.answer("TikTok2", reply_markup=builder.as_markup())
+
 
             else:
                 # already run autoposting
-                print('already run autoposting')
+
                 one_inline_btn("Turn OFF autoposting", "end_tt_auto")
 
             # tt_btn = asyncio.create_task(tiktok_btn_task(message, obj_tiktok_user, group_chat_id))
