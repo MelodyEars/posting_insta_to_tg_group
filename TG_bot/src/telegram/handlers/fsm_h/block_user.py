@@ -3,7 +3,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 
 from TG_bot.setup import admin_router
-from database.tables import User
+from database.tables import TelegramUser
 from TG_bot.src.telegram.messages.admin_msg import admin_MESSAGES
 
 blocked_users = []
@@ -19,7 +19,7 @@ class AddUser(StatesGroup):
 
 @admin_router.message(DeleteUser.username)
 async def block(message: Message, state: FSMContext):
-    user = User.get_or_none(id_telegram=message.text)
+    user = TelegramUser.get_or_none(id_telegram=message.text)
     if user:
         user.delete_instance()
         await message.reply(f"{message.text} " + admin_MESSAGES['deleted_user'],
@@ -34,7 +34,7 @@ async def block(message: Message, state: FSMContext):
 async def unblock(message: Message, state: FSMContext):
     try:
         int_id_tg = int(message.text)
-        user, created = User.get_or_create(id_telegram=int_id_tg)
+        user, created = TelegramUser.get_or_create(id_telegram=int_id_tg)
     except ValueError:
         await message.reply(admin_MESSAGES['error_enter_username'])
         return
