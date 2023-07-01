@@ -3,6 +3,7 @@ from aiogram import F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from aiogram.filters import Command
+from loguru import logger
 
 from TG_bot.setup import user_router
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns, one_inline_btn
@@ -58,13 +59,16 @@ async def starter_work(message: Message):
         if obj_tiktok_user is not None and group_chat_id is not None:
             if not obj_tiktok_user.autoposting_tt:
                 # still not run autoposting
+                logger.info("still not run autoposting")
                 builder = one_inline_btn("Run autoposting", "start_tt_auto")
                 await message.answer("Starting TikTok", reply_markup=builder.as_markup())
 
             else:
                 # already run autoposting
+                logger.info("already run autoposting")
+                builder = one_inline_btn("Turn OFF autoposting", "end_tt_auto")
+                await message.answer("Tiktok was started", reply_markup=builder.as_markup())
 
-                one_inline_btn("Turn OFF autoposting", "end_tt_auto")
 
             # tt_btn = asyncio.create_task(tiktok_btn_task(message, obj_tiktok_user, group_chat_id))
             # await tt_btn
