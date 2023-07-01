@@ -59,8 +59,7 @@ async def starter_work(message: Message):
             if not obj_tiktok_user.autoposting_tt:
                 # still not run autoposting
                 builder = one_inline_btn("Run autoposting", "start_tt_auto")
-                await message.answer("TikTok2", reply_markup=builder.as_markup())
-
+                await message.answer("Starting TikTok", reply_markup=builder.as_markup())
 
             else:
                 # already run autoposting

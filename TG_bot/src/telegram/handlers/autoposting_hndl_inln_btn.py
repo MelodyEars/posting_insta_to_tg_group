@@ -3,7 +3,7 @@ import asyncio
 from aiogram import types
 from aiogram.filters import Text
 
-from TG_bot.setup import dp
+from new_run_TGBOT import dp
 from TG_bot.src.telegram.buttons.user_btn import one_inline_btn
 from TG_bot.src.telegram.handlers.btn_task_main_menu import autoposting_tt_inline_btn_task, \
     stop_autoposting_tt_inline_btn_task
@@ -24,8 +24,6 @@ async def run_autoposting(callback: types.CallbackQuery):
     one_inline_btn("Turn OFF autoposting", "end_tt_auto")
 
     await autoposting
-
-
 
 
 @dp.callback_query(Text("start_tt_auto"))
