@@ -2,6 +2,7 @@ import asyncio
 
 from aiogram import types
 from aiogram.filters import Text
+from loguru import logger
 
 from new_run_TGBOT import dp
 from TG_bot.src.telegram.buttons.user_btn import one_inline_btn
@@ -15,6 +16,7 @@ from database.tables import TikTokUser
 
 @dp.callback_query(Text("start_tt_auto"))
 async def run_autoposting(callback: types.CallbackQuery):
+    logger.info("start_tt_auto")
     message = callback.message
     obj_tiktok_user: TikTokUser = db_get_tt_name_by_tg_id(message.from_user.id)
     group_chat_id = get_user_by_tg_id(message.from_user.id).group_chat_id
