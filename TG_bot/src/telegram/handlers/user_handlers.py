@@ -56,7 +56,7 @@ async def starter_work(message: Message):
         obj_tiktok_user: TikTokUser = db_get_tt_name_by_tg_id(message.chat.id)
         group_chat_id = get_user_by_tg_id(message.chat.id).group_chat_id
 
-        if obj_tiktok_user is not None and group_chat_id is not None:
+        if not (obj_tiktok_user is None and group_chat_id is None):
             if not obj_tiktok_user.autoposting_tt:
                 # still not run autoposting
                 logger.info("still not run autoposting")
@@ -68,10 +68,6 @@ async def starter_work(message: Message):
                 logger.info("already run autoposting")
                 builder = one_inline_btn("Turn OFF autoposting", "end_tt_auto")
                 await message.answer("Tiktok was started", reply_markup=builder.as_markup())
-
-
-            # tt_btn = asyncio.create_task(tiktok_btn_task(message, obj_tiktok_user, group_chat_id))
-            # await tt_btn
 
         else:
             await message.answer(ErrorMessages['request_attend_settings'] + 'Tiktok')

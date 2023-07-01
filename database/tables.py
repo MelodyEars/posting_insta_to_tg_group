@@ -16,7 +16,7 @@ class TelegramUser(BaseModel):
     tg_username = pw.CharField(max_length=100, null=True)
     chat_id_user = pw.BigIntegerField(unique=True)
 
-    group_name_chat = pw.BigIntegerField(default=None, null=True)
+    group_name_chat = pw.CharField(default=None, null=True)
     group_chat_id = pw.BigIntegerField(default=None, null=True)
 
     status_user = pw.CharField(default='regular_user')
