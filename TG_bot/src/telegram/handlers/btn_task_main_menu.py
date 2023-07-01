@@ -63,5 +63,5 @@ async def stop_autoposting_tt_inline_btn_task(message: Message):
 
     obj_tiktok_user = db_get_tt_name_by_tg_id(message.from_user.id)
     db_upd_status_autoposting_tt(obj_tiktok_user, autoposting)
-    await message.answer(ProcessActions['stop_autoposting'], )
+
 
