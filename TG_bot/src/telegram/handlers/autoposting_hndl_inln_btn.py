@@ -28,7 +28,7 @@ async def run_autoposting(callback: types.CallbackQuery):
     await autoposting
 
 
-@dp.callback_query(Text("start_tt_auto"))
+@dp.callback_query(Text("end_tt_auto"))
 async def end_posting(callback: types.CallbackQuery):
     message = callback.message
     one_inline_btn("Run autoposting", "start_tt_auto")
