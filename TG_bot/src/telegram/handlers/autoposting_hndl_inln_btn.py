@@ -4,7 +4,7 @@ from aiogram import types
 from aiogram.filters import Text
 from loguru import logger
 
-from new_run_TGBOT import dp
+from TG_bot.setup import dp
 from TG_bot.src.telegram.buttons.user_btn import one_inline_btn
 from TG_bot.src.telegram.handlers.btn_task_main_menu import autoposting_tt_inline_btn_task, \
     stop_autoposting_tt_inline_btn_task
