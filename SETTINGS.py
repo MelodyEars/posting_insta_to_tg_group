@@ -1,7 +1,7 @@
 
 import peewee as pw
 
-docker = False
+docker = True
 admins_id = [487950394]
 
 TOKEN = '5839603708:AAGAr8PgN6u8WjpbxWEC2Ni3uhngsgW8i7A'
