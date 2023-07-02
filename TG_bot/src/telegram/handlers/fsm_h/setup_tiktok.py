@@ -37,6 +37,9 @@ async def cancel_handler(message: Message, state: FSMContext, text='ㅤ'):
 
 @user_router.message(SetUpTikTok.tiktok_login)
 async def answer_login(message: Message, state: FSMContext):
+    logger.info("message.text: " + message.text)
+    logger.info("owner: " + message.from_user.username)
+
     msg_text = message.text.replace("\n", "").replace(" ", "").replace("@", "")
     if msg_text == "":
         # if empty request

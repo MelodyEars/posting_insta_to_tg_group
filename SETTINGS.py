@@ -1,3 +1,4 @@
+
 import peewee as pw
 
 
@@ -10,10 +11,18 @@ executable_path = '/usr/bin/chromium'
 
 set_database = {
                     "user": 'postgres',
-                    "password": 'admin',
-                    "host": "db",
+                    "password": 'root123',
+                    "host": "localhost",
                     "port": 5432,
                     }
+
+
+# set_database = {
+#                     "user": 'postgres',
+#                     "password": 'admin',
+#                     "host": "db",
+#                     "port": 5432,
+#                     }
 
 db = pw.PostgresqlDatabase('admin', **set_database)
 
