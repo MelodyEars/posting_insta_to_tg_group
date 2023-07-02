@@ -26,13 +26,14 @@ async def run_autoposting(callback: types.CallbackQuery):
     obj_tiktok_user: TikTokUser = db_get_tt_name_by_tg_id(message.chat.id)
     group_chat_id = get_user_by_tg_id(message.chat.id).group_chat_id
 
-    autoposting = asyncio.create_task(autoposting_tt_inline_btn_task(message, obj_tiktok_user, group_chat_id))
+    autoposting = asyncio.create_task(autoposting_tt_inline_btn_task(obj_tiktok_user, group_chat_id))
 
     builder = one_inline_btn("Turn OFF autoposting", "end_tt_auto")
     with suppress(TelegramBadRequest):
         await message.edit_text("Process was activated.", reply_markup=builder.as_markup())
-    await callback.answer()
 
+    await callback.answer()
+    logger.info("await autoposting")
     await autoposting
 
 

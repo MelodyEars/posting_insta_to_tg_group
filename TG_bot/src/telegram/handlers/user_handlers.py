@@ -50,9 +50,10 @@ async def back_handl(message: Message):
 
 @user_router.message(F.text.in_(MESSAGES['main_btn_list']))
 async def starter_work(message: Message):
+    logger.info("starter_work")
     if message.text == MESSAGES['main_btn_list'][0]:  # TikTok
         # TODO tiktokapi not have video on tiktok page
-
+        logger.info("TikTok")
         obj_tiktok_user: TikTokUser = db_get_tt_name_by_tg_id(message.chat.id)
         group_chat_id = get_user_by_tg_id(message.chat.id).group_chat_id
 
@@ -83,19 +84,19 @@ async def starter_work(message: Message):
 
 @user_router.message(F.text.in_(MESSAGES['settings_btn_list']))
 async def setup_social_network(message: Message,  state: FSMContext):
-    if message.text == MESSAGES['settings_btn_list'][0]:  # SetUP TikTok
-        await state.set_state(SetUpTikTok.tiktok_login)
-        await message.reply(SetUpTikTokMessages['quest_tiktok_login'], reply_markup=one_btn(MESSAGES['back']))
+    # if message.text == MESSAGES['settings_btn_list'][0]:  # SetUP TikTok
+    #     await state.set_state(SetUpTikTok.tiktok_login)
+    #     await message.reply(SetUpTikTokMessages['quest_tiktok_login'], reply_markup=one_btn(MESSAGES['back']))
 
-    elif message.text == MESSAGES['settings_btn_list'][1]:  # SetUP Instagram
+    if message.text == MESSAGES['settings_btn_list'][0]:  # SetUP Instagram
         await state.set_state(SetUpInstagram.insta_login)
         await message.reply(SetUpInstaMessages['quest_insta_login'], reply_markup=one_btn(MESSAGES['back']))
 
-    elif message.text == MESSAGES['settings_btn_list'][2]:  # SetUP Telegram
+    elif message.text == MESSAGES['settings_btn_list'][1]:  # SetUP Telegram
         await state.set_state(SetUpTelegram.link_your_chanel)
         await message.reply(SetUpTelegramMessages['nickname_chanel'], reply_markup=one_btn(MESSAGES['back']))
 
-    elif message.text == MESSAGES['settings_btn_list'][3]:  # <<< Back
+    elif message.text == MESSAGES['settings_btn_list'][2]:  # <<< Back
         await message.answer(
             'ㅤ',
             reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
