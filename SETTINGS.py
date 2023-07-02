@@ -6,8 +6,10 @@ admins_id = [487950394]
 
 TOKEN = '5839603708:AAGAr8PgN6u8WjpbxWEC2Ni3uhngsgW8i7A'
 
-executable_path = '/usr/bin/chromium'
-# executable_path = None
+if docker:
+    executable_path = '/usr/bin/chromium'
+else:
+    executable_path = None
 
 
 if docker:
