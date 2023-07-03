@@ -1,9 +1,9 @@
 hi_user = 'Welcome Back!👋 '
 
 help_message = f'''
-                    In order to use the bot you need click settings,\n
-                    then choose settings for social networks and follow the steps.\n
-                '''
+In order to use the bot you need click settings,
+then choose settings for social networks and follow the steps.
+'''
 
 start_message = hi_user + '\n' + help_message
 
@@ -11,11 +11,11 @@ start_message = hi_user + '\n' + help_message
 back = '<<< Back'
 empty_request = 'Please, enter something'
 # _____________________________________________________________________________________ main btns
-main_btn_list = ['TikTok', 'Settings']
+main_btn_list = ['TikTok', 'Settings🛠️']
 main_input_field = 'Choose one for start'
 
 # _____________________________________________________________________________________ settings btns
-settings_btn_list = ['SetUP TikTok', 'SetUP Telegram', 'Back to Main Menu']
+settings_btn_list = ['SetUP TikTok⚙️', 'SetUP Telegram⚙️', '🔙 to Main Menu']
 settings_input_field = 'Choose one social network for setUP'
 
 # ________________________________________ Buttons and input fields for admin ________________________________________
@@ -36,13 +36,13 @@ quest_tiktok_login = 'Enter your login for TikTok(without @)'
 # ______________________________________________ Questions Setup telegram _____________________________________________
 
 nickname_chanel = 'Enter your nickname chanel as @chanel_name'
-send_username = 'PLease, send your chanel username as @chanel_username'
+send_username = 'Please, send your chanel username as @chanel_username'
 
 
 # ______________________________________________ Handling Error _____________________________________________
 request_attend_settings = '''
-Please, set up your social networks first.
-Click settings and follow the steps. 
+🔒Please, set up⚙️ your social networks first.
+Click settings🛠️ and follow the steps. 
 Check Telegram or 
 '''
 
@@ -53,3 +53,7 @@ sent_success = 'Sent to your channel!'
 same_video = "Some videos were uploaded to the telegram channel"
 start_autoposting = 'Start autoposting'
 stop_autoposting = 'Stop autoposting'
+msg_start_autoposting = """"
+In order to start the autopost.
+⬇️Please, press the button below⬇️
+"""

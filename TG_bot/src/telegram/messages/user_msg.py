@@ -90,6 +90,7 @@ class ProcessActions(TypedDict):
     same_video: str
     start_autoposting: str
     stop_autoposting: str
+    msg_start_autoposting: str
 
 
 ProcessActions: ProcessActions = {
@@ -98,5 +99,6 @@ ProcessActions: ProcessActions = {
     'sent_success': sent_success,
     'same_video': same_video,
     'start_autoposting': start_autoposting,
-    'stop_autoposting': stop_autoposting
+    'stop_autoposting': stop_autoposting,
+    'msg_start_autoposting': msg_start_autoposting,
 }

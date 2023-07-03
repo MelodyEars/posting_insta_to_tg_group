@@ -8,15 +8,11 @@ from database.tables import TikTokVideo, TikTokUser, TelegramUser
 # _________________________________________________________________________________ TikTok
 def db_get_tt_name_by_tg_id(tg_chat_id: int) -> TikTokUser or None:
     with db:
-        try:
-            user = TelegramUser.get(chat_id_user=tg_chat_id)
-            logger.info(f"get tt name by tg id: {user.tg_username}")
-            # tiktok_user: TikTokUser = TikTokUser.get_or_none(TikTokUser.tg_id_user == user)
-            tiktok_user = user.telegram_users.first()
-            return tiktok_user
-        except DoesNotExist:
-            return None
-
+        user = TelegramUser.get(chat_id_user=tg_chat_id)
+        logger.info(f"get tt name by tg id: {user.tg_username}")
+        # tiktok_user: TikTokUser = TikTokUser.get_or_none(TikTokUser.tg_id_user == user)
+        tiktok_user = user.telegram_users.first()
+        return tiktok_user
 
 def db_add_downloaded_video(video_record: dict):
     logger.info(f"add downloaded video to db: {video_record}")

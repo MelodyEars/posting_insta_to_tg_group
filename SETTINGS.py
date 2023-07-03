@@ -2,21 +2,19 @@
 import peewee as pw
 
 docker = True
+
+# _________________________________________________________________________________ Telegram settings
 admins_id = [487950394]
 
 TOKEN = '5839603708:AAGAr8PgN6u8WjpbxWEC2Ni3uhngsgW8i7A'
 
-if docker:
-    executable_path = '/usr/bin/chromium'
-else:
-    executable_path = None
 
-
+# _________________________________________________________________________________ Database settings
 if docker:
     set_database = {
                         "user": 'postgres',
-                        "password": 'admin',
-                        "host": "db",
+                        "password": 'postgres',
+                        "host": "postgres",
                         "port": 5432,
                         }
 
@@ -32,8 +30,21 @@ else:
 db = pw.PostgresqlDatabase('admin', **set_database)
 
 
-# Browsers settings
+# _________________________________________________________________________________ Browsers settings
 if docker:
     TIKTOK_BROWSER_HEADLESS = True
 else:
     TIKTOK_BROWSER_HEADLESS = False
+
+
+if docker:
+    google_version = 112
+else:
+    google_version = None
+
+
+if docker:
+    executable_path = '/usr/bin/chromium-browser'
+    # executable_path = None
+else:
+    executable_path = None

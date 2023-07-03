@@ -7,11 +7,10 @@ from loguru import logger
 
 from TG_bot.setup import user_router
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns, one_inline_btn
-from TG_bot.src.telegram.handlers.fsm_h.setup_instagram import SetUpInstagram
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
-from TG_bot.src.telegram.messages.user_msg import (MESSAGES, SetUpInstaMessages, SetUpTikTokMessages,
-                                                   SetUpTelegramMessages, ErrorMessages)
+from TG_bot.src.telegram.messages.user_msg import (MESSAGES, SetUpTikTokMessages, SetUpTelegramMessages,
+                                                   ErrorMessages, ProcessActions)
 from database.query.btns_main_menu import db_get_tt_name_by_tg_id
 from database.query.registration import db_add_user
 from database.query.users import get_user_by_tg_id
@@ -61,13 +60,13 @@ async def starter_work(message: Message):
             if not obj_tiktok_user.autoposting_tt:
                 # still not run autoposting
                 logger.info("still not run autoposting")
-                builder = one_inline_btn("Run autoposting", "start_tt_auto")
-                await message.answer("Starting TikTok", reply_markup=builder.as_markup())
+                builder = one_inline_btn("🔄 Run autoposting", "start_tt_auto")
+                await message.answer(ProcessActions["msg_start_autoposting"], reply_markup=builder.as_markup())
 
             else:
                 # already run autoposting
                 logger.info("already run autoposting")
-                builder = one_inline_btn("Turn OFF autoposting", "end_tt_auto")
+                builder = one_inline_btn("❌ Turn OFF autoposting", "end_tt_auto")
                 await message.answer("Tiktok was started", reply_markup=builder.as_markup())
 
         else:

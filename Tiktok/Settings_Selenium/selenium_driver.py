@@ -3,30 +3,23 @@ import time
 import random
 from http.client import RemoteDisconnected
 
-import requests
-
 import undetected_chromedriver as uc
 
 from loguru import logger
-from requests import JSONDecodeError, ReadTimeout
-from requests.exceptions import ProxyError, ConnectTimeout
+from requests import ReadTimeout
 
 from selenium.common.exceptions import TimeoutException, StaleElementReferenceException, NoSuchElementException, \
     ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from urllib3.exceptions import ProtocolError
 
-# from base_exception import ProxyInvalidException
-from SETTINGS import executable_path
-
-from .SeleniumExtension import EnhancedActionChains, ProxyExtension
+from SETTINGS import executable_path, google_version
 
 
 def removeCDC(driver):
-    cdc_props: list[str] = driver.execute_script(  # type: ignore
+    cdc_props: list[str] = driver.execute_script(
         """
         let objectToInspect = window,
             result = [];
@@ -44,60 +37,6 @@ def removeCDC(driver):
         cmd_args={"source": f"{cdc_props_js_array}.forEach(p => delete window[p] && console.log('removed', p));"},
     )
 
-    # file_bin = re.sub(rb"\$cdc_[a-zA-Z0-9]{22}_", lambda m: bytes(
-    #     random.choices((string.ascii_letters + string.digits).encode("ascii"), k=len(m.group()))), file_bin)
-
-
-def geolocation(loc_value_JSON: str):
-    data = loc_value_JSON.split(",")
-    latitude = float(data[0])
-    longitude = float(data[1])
-    capabilities = DesiredCapabilities.CHROME.copy()
-    capabilities['locationContextEnabled'] = True
-    capabilities['locationContextDefaultZoomLevel'] = 13
-    capabilities['locationContextEnabled'] = True
-    capabilities['locationContextMaxDistance'] = 10000
-    capabilities['locationContextGeoLocation'] = {'latitude': latitude, 'longitude': longitude}
-
-    return capabilities
-
-
-def proxy_data(proxy: dict):
-    proxies = {"http": f"http://{proxy['user']}:{proxy['password']}@{proxy['host']}:{proxy['port']}"}
-    url = "http://ipinfo.io/json"
-
-    try:
-        resp = requests.get(url, proxies=proxies, timeout=10)
-
-    except (ConnectionError, TimeoutException, ConnectionResetError, TimeoutError, ReadTimeout, ConnectTimeout):
-        logger.error(f"Щось з проксі {proxy['user']}:{proxy['password']}:{proxy['host']}:{proxy['port']}!")
-        return proxy_data(proxy)
-    except ProxyError:
-        logger.error(f"Щось з проксі {proxy['user']}:{proxy['password']}:{proxy['host']}:{proxy['port']}!")
-        raise Exception("ProxyError: Invalid proxy ")
-    logger.info(resp)
-    return resp
-
-
-# class Chrome(uc.Chrome):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.get = None
-#
-#     def get(self, url):
-#         # block js execution
-#         self.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": "alert();"})
-#         # but let get(url) immediately return
-#         super().get(url)
-#         # resume js execution
-#         self.switch_to.alert.accept()
-#         # immediately stop and restart the service to avoid timings detection
-#         self.reconnect()
-#         # this is only needed once per session, is it ?
-#         self.get = super().get
-
-        # driver.execute_script("""setTimeout(() => window.location.href="https://www.bet365.com", 100)""");
-
 
 class BaseClass:
 
@@ -105,73 +44,33 @@ class BaseClass:
         self.action = None
         self.DRIVER = uc.Chrome
 
-    def __set_new_download_path(self, download_path):
-        # Defines auto download and download PATH
-        params = {
-            "behavior": "allow",
-            "downloadPath": str(download_path)
+    def _set_up_driver(self, headless=False):
+
+        your_options = {
+            "headless": headless,
+            "browser_executable_path": executable_path,
+            "user_multi_procs": True,
+            "use_subprocess": False,
+            "version_main": google_version
         }
 
-        self.DRIVER.execute_cdp_cmd("Page.setDownloadBehavior", params)
-
-        return self.DRIVER
-
-    def _set_up_driver(self, browser_executable_path=executable_path,
-                   download_path="default", proxy=None, headless=False, detection_location=True):
-
-        resp = None
-
-        your_options = {}
-        options = uc.ChromeOptions()
-
-        if proxy is not None:
-            # proxy = ("64.32.16.8", 8080, "username", "password")  # your proxy with auth, this one is obviously fake
-            # pass  host, port, user, password
-            proxy_extension = ProxyExtension(**proxy)
-            options.add_argument(f"--load-extension={proxy_extension.directory}")
-            resp = proxy_data(proxy)
-
-            # ____________________________ location _______________________________
-            if detection_location:
-                try:
-                    capabilities = geolocation(resp.json()['loc'])
-                    your_options['desired_capabilities'] = capabilities
-                except JSONDecodeError:
-                    raise Exception("Щось не так з проксі. Було залучено останній з файлу 'proxies.txt'")
-
-        your_options["headless"] = headless
-        your_options["options"] = options
-        your_options["browser_executable_path"] = browser_executable_path
-
         # if not profile or user_data_dir == incognito
-        self.DRIVER = uc.Chrome(**your_options, user_multi_procs=True, use_subprocess=False)
+        self.DRIVER = uc.Chrome(**your_options,)
 
         removeCDC(self.DRIVER)
 
         self.DRIVER.maximize_window()
-        self.action = EnhancedActionChains(self.DRIVER)
 
-        # __________________________________ timezone _________________________________
-        if proxy is not None:
-            tz_params = {'timezoneId': resp.json()['timezone']}
-            self.DRIVER.execute_cdp_cmd('Emulation.setTimezoneOverride', tz_params)
+        return self.DRIVER
 
-        # if you need download to your folder
-        if download_path == "default":
-            return self.DRIVER
-
-        else:
-            return self.__set_new_download_path(download_path)
-
-    def run_driver(self, browser_executable_path=executable_path,
-                   download_path="default", proxy=None, headless=False, detection_location=True):
+    def run_driver(self, headless=False):
         try:
-            return self._set_up_driver(browser_executable_path, download_path, proxy, headless, detection_location)
+            return self._set_up_driver(headless)
 
         except (ConnectionResetError, ProtocolError, TimeoutError, ReadTimeout,
                 ConnectionError, RemoteDisconnected) as e:
             logger.error(f'{type(e).__name__} in selenium_driver.py')
-            return self.run_driver(browser_executable_path, download_path, proxy, headless, detection_location)
+            return self.run_driver(headless)
 
     def elem_exists(self, value, by=By.XPATH, wait=120, return_xpath=False, scroll_to=False):
         try:
@@ -260,10 +159,6 @@ class BaseClass:
     def scroll_to_elem(self, value):
         web_elem = self.elem_exists(value, return_xpath=True)
         self.DRIVER.execute_script("arguments[0].scrollIntoView();", web_elem)
-
-    def stealth_send_text(self, value, text_or_key, by=By.XPATH, scroll_to=False, wait=60):
-        if self.click_element(value, by=by, scroll_to=scroll_to, wait=wait):
-            self.action.send_keys_1by1(text_or_key).perform()
 
     def reset_actions(self):
         self.action.reset_actions()
