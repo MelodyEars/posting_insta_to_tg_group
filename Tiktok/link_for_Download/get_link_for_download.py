@@ -21,7 +21,7 @@ class TiktokDownloader(BaseClass):
         self.proxy = proxy
 
     def __enter__(self):
-        self.DRIVER = self.run_driver(proxy=self.proxy, headless=TIKTOK_BROWSER_HEADLESS)
+        self.DRIVER = self.run_driver(headless=TIKTOK_BROWSER_HEADLESS)
 
         return self
 

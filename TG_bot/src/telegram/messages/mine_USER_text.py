@@ -53,7 +53,7 @@ sent_success = 'Sent to your channel!'
 same_video = "Some videos were uploaded to the telegram channel"
 start_autoposting = 'Start autoposting'
 stop_autoposting = 'Stop autoposting'
-msg_start_autoposting = """"
+msg_start_autoposting = """
 In order to start the autopost.
 ⬇️Please, press the button below⬇️
 """

@@ -14,7 +14,7 @@ if server:
     set_database = {
                         "user": 'postgres',
                         "password": 'postgres',
-                        "host": "postgres",
+                        "host": "localhost",
                         "port": 5432,
                         }
 
@@ -27,7 +27,7 @@ else:
                         }
 
 
-db = pw.PostgresqlDatabase('admin', **set_database)
+db = pw.PostgresqlDatabase('postgres', **set_database)
 
 
 # _________________________________________________________________________________ Browsers settings
