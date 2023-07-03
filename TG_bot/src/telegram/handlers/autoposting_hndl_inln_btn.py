@@ -43,8 +43,8 @@ async def end_posting(callback: types.CallbackQuery):
 
     id_chat_user = message.chat.id
     await stop_autoposting_tt_inline_btn_task(id_chat_user)
-    builder = one_inline_btn(ProcessActions["msg_start_autoposting"], "start_tt_auto")
 
+    builder = one_inline_btn("Run autoposting", "start_tt_auto")
     with suppress(TelegramBadRequest):
         await message.edit_text(ProcessActions['stop_autoposting'], reply_markup=builder.as_markup())
 
