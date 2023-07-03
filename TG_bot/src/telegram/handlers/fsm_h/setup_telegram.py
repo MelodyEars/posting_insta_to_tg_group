@@ -22,17 +22,24 @@ class StructData(NamedTuple):
 
 
 @user_router.message(F.text == MESSAGES['back'])
-async def cancel_handler(message: Message, state: FSMContext, text='ㅤ'):
+async def cancel_handler(message: Message, state: FSMContext, text=''):
     current_state = await state.get_state()
     if current_state is None:
         return
 
     await state.clear()
-    await message.reply(
-        text,
-        reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
-                               txt_input_field=MESSAGES['settings_input_field'])
-    )
+    if text:
+        await message.reply(
+            text,
+            reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
+                                   txt_input_field=MESSAGES['settings_input_field'])
+        )
+    else:
+        await bot.edit_message_reply_markup(
+            message_id=message.message_id,
+            reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
+                                   txt_input_field=MESSAGES['settings_input_field'])
+        )
 
 
 @user_router.message(SetUpTelegram.link_your_chanel)

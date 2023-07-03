@@ -7,7 +7,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 
-from TG_bot.setup import user_router
+from TG_bot.setup import user_router, bot
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
 from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpTikTokMessages
 from database.query.set_up_social_network import db_create_TT_user
@@ -22,17 +22,24 @@ class StructData(NamedTuple):
 
 
 @user_router.message(F.text == MESSAGES['back'])
-async def cancel_handler(message: Message, state: FSMContext, text='ㅤ'):
+async def cancel_handler(message: Message, state: FSMContext, text=''):
     current_state = await state.get_state()
     if current_state is None:
         return
 
     await state.clear()
-    await message.reply(
-        text,
-        reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
-                               txt_input_field=MESSAGES['settings_input_field'])
-    )
+    if text:
+        await message.reply(
+            text,
+            reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
+                                   txt_input_field=MESSAGES['settings_input_field'])
+        )
+    else:
+        await bot.edit_message_reply_markup(
+            message_id=message.message_id,
+            reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
+                                   txt_input_field=MESSAGES['settings_input_field'])
+        )
 
 
 @user_router.message(SetUpTikTok.tiktok_login)

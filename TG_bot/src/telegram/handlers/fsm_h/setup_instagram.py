@@ -8,7 +8,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 
-from TG_bot.setup import user_router
+from TG_bot.setup import user_router, bot
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
 from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpInstaMessages
 
@@ -30,8 +30,8 @@ async def cancel_handler(message: Message, state: FSMContext):
         return
 
     await state.clear()
-    await message.reply(
-        'ㅤ',
+    await bot.edit_message_reply_markup(
+        message_id=message.message_id,
         reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
                                txt_input_field=MESSAGES['settings_input_field'])
     )

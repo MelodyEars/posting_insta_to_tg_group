@@ -5,7 +5,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 from loguru import logger
 
-from TG_bot.setup import user_router
+from TG_bot.setup import user_router, bot
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns, one_inline_btn
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
@@ -40,8 +40,8 @@ async def helper(message: Message):
 
 @user_router.message(F.text == MESSAGES['back'])
 async def back_handl(message: Message):
-    await message.reply(
-        "ㅤ",
+    await bot.edit_message_reply_markup(
+        message_id=message.message_id,
         reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
                                txt_input_field=MESSAGES['main_input_field'])
     )
@@ -74,8 +74,8 @@ async def starter_work(message: Message):
             # Todo add inline-button for setup tiktok and telegram
 
     elif message.text == MESSAGES['main_btn_list'][1]:  # Settings
-        await message.answer(
-            'ㅤ',
+        await bot.edit_message_reply_markup(
+            message_id=message.message_id,
             reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
                                    txt_input_field=MESSAGES['settings_input_field'])
         )
@@ -99,8 +99,4 @@ async def setup_social_network(message: Message,  state: FSMContext):
         )
 
     elif message.text == MESSAGES['settings_btn_list'][3]:  # <<< Back
-        await message.answer(
-            'ㅤ',
-            reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
-                                   txt_input_field=MESSAGES['main_input_field'])
-        )
+        await back_handl(message)

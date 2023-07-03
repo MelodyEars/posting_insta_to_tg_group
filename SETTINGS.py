@@ -1,13 +1,15 @@
 
 import peewee as pw
 
-server = True
+server = False
 
 # _________________________________________________________________________________ Telegram settings
 admins_id = [487950394]
 
-TOKEN = '5839603708:AAGAr8PgN6u8WjpbxWEC2Ni3uhngsgW8i7A'
-
+if server:
+    TOKEN = '5839603708:AAGAr8PgN6u8WjpbxWEC2Ni3uhngsgW8i7A'
+else:
+    TOKEN = '6053260400:AAF-stwr2OZNNkAtoUtCB54hqUTBTifNRO4'
 
 # _________________________________________________________________________________ Database settings
 if server:
