@@ -86,16 +86,19 @@ async def setup_social_network(message: Message,  state: FSMContext):
     if message.text == MESSAGES['settings_btn_list'][0]:  # SetUP TikTok
         await state.set_state(SetUpTikTok.tiktok_login)
         await message.reply(SetUpTikTokMessages['quest_tiktok_login'], reply_markup=one_btn(MESSAGES['back']))
-    #
-    # if message.text == MESSAGES['settings_btn_list'][0]:  # SetUP Instagram
-    #     await state.set_state(SetUpInstagram.insta_login)
-    #     await message.reply(SetUpInstaMessages['quest_insta_login'], reply_markup=one_btn(MESSAGES['back']))
 
     elif message.text == MESSAGES['settings_btn_list'][1]:  # SetUP Telegram
         await state.set_state(SetUpTelegram.link_your_chanel)
         await message.reply(SetUpTelegramMessages['nickname_chanel'], reply_markup=one_btn(MESSAGES['back']))
 
     elif message.text == MESSAGES['settings_btn_list'][2]:  # <<< Back
+        await message.answer(
+            'Contact us: \n https://t.me/+mbJKlsjGfmE5ZTdi',
+            reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
+                                   txt_input_field=MESSAGES['main_input_field'])
+        )
+
+    elif message.text == MESSAGES['settings_btn_list'][3]:  # <<< Back
         await message.answer(
             'ㅤ',
             reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],

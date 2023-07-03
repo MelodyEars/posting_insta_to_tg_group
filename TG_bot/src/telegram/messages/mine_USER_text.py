@@ -15,7 +15,7 @@ main_btn_list = ['TikTok', 'Settings🛠️']
 main_input_field = 'Choose one for start'
 
 # _____________________________________________________________________________________ settings btns
-settings_btn_list = ['SetUP TikTok⚙️', 'SetUP Telegram⚙️', '🔙 to Main Menu']
+settings_btn_list = ['SetUP TikTok⚙️', 'SetUP Telegram⚙️', 'Support', '🔙 to Main Menu']
 settings_input_field = 'Choose one social network for setUP'
 
 # ________________________________________ Buttons and input fields for admin ________________________________________
