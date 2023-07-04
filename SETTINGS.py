@@ -1,7 +1,7 @@
 
 import peewee as pw
 
-server = False
+server = True
 
 # _________________________________________________________________________________ Telegram settings
 admins_id = [487950394]
