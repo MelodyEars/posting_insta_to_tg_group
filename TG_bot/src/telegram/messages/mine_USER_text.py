@@ -1,8 +1,11 @@
 hi_user = 'Welcome Back!👋 '
 
 help_message = f'''
-In order to use the bot you need click settings,
-then choose settings for social networks and follow the steps.
+In order to use the bot you need click settings🛠,
+then choose set up⚙️ for social networks and follow the steps.
+
+Щоб скористатися ботом, потрібно натиснути settings🛠,
+потім виберіть set up⚙️ для соціальних мереж і дотримуйтесь інструкцій.
 '''
 
 start_message = hi_user + '\n' + help_message
@@ -43,7 +46,11 @@ send_username = 'Please, send your chanel username as @chanel_username'
 request_attend_settings = '''
 🔒Please, set up⚙️ your social networks first.
 Click settings🛠️ and follow the steps. 
-Check Telegram or 
+Check Telegram or TikTok. 
+
+🔒Спочатку налаштуйте⚙️ свої соціальні мережі.
+Натисніть налаштування🛠️ та виконайте вказівки.
+Перевірте Telegram або
 '''
 
 # ______________________________________________ Process Actions _____________________________________________
@@ -54,6 +61,15 @@ same_video = "Some videos were uploaded to the telegram channel"
 start_autoposting = 'Start autoposting'
 stop_autoposting = 'Stop autoposting'
 msg_start_autoposting = """
+WARNING❗️
+Don't forget to make this bot @MessHub_bot
+an admin of your telegram channel,
+which you added➕ in settings🛠.
+
+Важливо❗️ не забудьте зробити бота @MessHub_bot
+адміном вашого телеграм каналу,
+який ви додали➕ в налаштуваннях🛠.
+
 In order to start the autopost.
 ⬇️Please, press the button below⬇️
 """
