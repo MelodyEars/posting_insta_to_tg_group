@@ -35,9 +35,8 @@ async def cancel_handler(message: Message, state: FSMContext, text=''):
                                    txt_input_field=MESSAGES['settings_input_field'])
         )
     else:
-        await bot.edit_message_reply_markup(
-            chat_id=message.chat.id,
-            message_id=message.message_id,
+        await message.answer(
+            text=message.text,
             reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
                                    txt_input_field=MESSAGES['settings_input_field'])
         )

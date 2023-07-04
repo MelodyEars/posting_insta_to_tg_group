@@ -40,9 +40,8 @@ async def helper(message: Message):
 
 @user_router.message(F.text == MESSAGES['back'])
 async def back_handl(message: Message):
-    await bot.edit_message_reply_markup(
-        chat_id=message.chat.id,
-        message_id=message.message_id,
+    await message.answer(
+        text=message.text,
         reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
                                txt_input_field=MESSAGES['main_input_field'])
     )
@@ -75,9 +74,8 @@ async def starter_work(message: Message):
             # Todo add inline-button for setup tiktok and telegram
 
     elif message.text == MESSAGES['main_btn_list'][1]:  # Settings
-        await bot.edit_message_reply_markup(
-            chat_id=message.chat.id,
-            message_id=message.message_id,
+        await message.answer(
+            text=message.text,
             reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
                                    txt_input_field=MESSAGES['settings_input_field'])
         )
