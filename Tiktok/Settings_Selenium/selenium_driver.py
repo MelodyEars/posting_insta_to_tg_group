@@ -1,7 +1,9 @@
 """ This file work with Selenium """
 import time
 import random
+
 from http.client import RemoteDisconnected
+from urllib3.exceptions import ProtocolError
 
 import undetected_chromedriver as uc
 
@@ -13,7 +15,8 @@ from selenium.common.exceptions import TimeoutException, StaleElementReferenceEx
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from urllib3.exceptions import ProtocolError
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.utils import keys_to_typing
 
 from SETTINGS import executable_path, google_version
 
@@ -38,6 +41,18 @@ def removeCDC(driver):
     )
 
 
+class EnhancedActionChains(ActionChains):
+    def send_keys_1by1(self, keys_to_send, time_s=0.2):
+        typing = keys_to_typing(keys_to_send)
+
+        for key in typing:
+            self.key_down(key)
+            self.key_up(key)
+            self.w3c_actions.key_action.pause(time_s)
+
+        return self
+
+
 class BaseClass:
 
     def __init__(self):
@@ -56,8 +71,9 @@ class BaseClass:
 
         # if not profile or user_data_dir == incognito
         self.DRIVER = uc.Chrome(**your_options,)
-
         removeCDC(self.DRIVER)
+
+        self.action = EnhancedActionChains(self.DRIVER)
 
         self.DRIVER.maximize_window()
 
