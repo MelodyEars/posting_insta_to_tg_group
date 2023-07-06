@@ -58,6 +58,6 @@ def db_get_status_autopsting(tt_user_obj: TikTokUser) -> bool:
     logger.info(f"get status autoposting tt: {tt_user_obj.autoposting_tt}")
 
     with db:
-        obj_tt_user = TikTokVideo.get_by_id(tt_user_obj.id)
+        obj_tt_user = TikTokUser.get_by_id(tt_user_obj.id)
         return obj_tt_user.autoposting_tt
 
