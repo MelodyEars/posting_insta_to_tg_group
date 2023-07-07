@@ -19,7 +19,7 @@ async def send_msg_from_db_to_chat(group_chat_id: int):
 
         await bot.send_video(
             chat_id=group_chat_id, video=video_from_pc,
-            caption=obj_video.name_video + "\n@MessHub_bot"
+            caption=obj_video.name_video + "\n\n Powered by @MessHub_bot"
         )
 
         db_update_uploaded_video(obj_video)

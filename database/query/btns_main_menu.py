@@ -14,6 +14,7 @@ def db_get_tt_name_by_tg_id(tg_chat_id: int) -> TikTokUser or None:
         tiktok_user = user.telegram_users.first()
         return tiktok_user
 
+
 def db_add_downloaded_video(video_record: dict):
     logger.info(f"add downloaded video to db: {video_record}")
 
