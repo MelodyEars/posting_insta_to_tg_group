@@ -1,4 +1,4 @@
-
+import re
 from typing import NamedTuple
 
 from aiogram import F
@@ -49,6 +49,12 @@ async def answer_login(message: Message, state: FSMContext):
         # if empty request
         await cancel_handler(message, state, MESSAGES['empty_request'])
         return
+
+    # check @url_chanel or https://t.me/url_chanel
+    pattern = r'https://t.me/(.*)'  # регулярний вираз для вилучення частини після "https://t.me/"
+    match = re.match(pattern, msg_text)
+    if match or msg_text[0] != '@':
+        msg_text = '@' + match.group(1)
 
     await state.set_state(SetUpTelegram.link_your_chanel)
     await state.update_data(link_your_chanel=msg_text)
