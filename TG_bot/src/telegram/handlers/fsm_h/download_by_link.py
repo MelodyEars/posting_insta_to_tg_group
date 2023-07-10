@@ -30,7 +30,7 @@ async def cancel_handler(message: Message, state: FSMContext, text=''):
 
     await state.clear()
     if text:
-        await message.reply(
+        await message.answer(
             text,
             reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
                                    txt_input_field=MESSAGES['main_input_field'])
@@ -38,9 +38,9 @@ async def cancel_handler(message: Message, state: FSMContext, text=''):
 
     else:
         await message.answer(
-            text=message.text,
-            reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
-                                   txt_input_field=MESSAGES['settings_input_field'])
+            text,
+            reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
+                                   txt_input_field=MESSAGES['main_input_field'])
         )
 
 
