@@ -38,7 +38,7 @@ async def cancel_handler(message: Message, state: FSMContext, text=''):
 
     else:
         await message.answer(
-            '__@MessHub_bot__',
+            '@MessHub_bot',
             reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
                                    txt_input_field=MESSAGES['main_input_field'])
         )
