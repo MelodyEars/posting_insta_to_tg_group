@@ -1,4 +1,5 @@
 import time
+from pathlib import Path
 
 from aiogram.types import Message, FSInputFile
 from loguru import logger
@@ -23,6 +24,7 @@ async def send_msg_from_db_to_chat(group_chat_id: int):
         )
 
         db_update_uploaded_video(obj_video)
+        Path(obj_video.path_video).unlink()  # del video from folder /tiktok_video
 
 #
 # async def tiktok_btn_task(message: Message, obj_tiktok_user: TikTokUser, group_chat_id: int):
@@ -43,7 +45,14 @@ async def send_msg_from_db_to_chat(group_chat_id: int):
 
 
 async def autoposting_tt_inline_btn_task(obj_tiktok_user: TikTokUser, group_chat_id: int):
+    """
+    Run autoposting task for every tiktok user.
+     Open browser every 5 minutes and check new one video,
+      download video if number of video not in db , send to telegram chat
+       """
+
     autoposting = True
+
     logger.info("start autoposting tt inline btn task")
     db_upd_status_autoposting_tt(obj_tiktok_user, autoposting)
 
@@ -66,10 +75,10 @@ async def autoposting_tt_inline_btn_task(obj_tiktok_user: TikTokUser, group_chat
 
 
 async def stop_autoposting_tt_inline_btn_task(group_chat_id):
+    """ Change status autoposting to False in db """
     autoposting = False
     logger.info("stop autoposting tt inline btn task")
 
     obj_tiktok_user = db_get_tt_name_by_tg_id(group_chat_id)
     db_upd_status_autoposting_tt(obj_tiktok_user, autoposting)
-
 

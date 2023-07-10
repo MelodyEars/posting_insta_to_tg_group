@@ -102,3 +102,13 @@ ProcessActions: ProcessActions = {
     'stop_autoposting': stop_autoposting,
     'msg_start_autoposting': msg_start_autoposting,
 }
+
+
+# ______________________________________________ Download by link _____________________________________________
+class DownloadByLinkMessages(TypedDict):
+    enter_link: str
+
+
+DownloadByLinkMessages: DownloadByLinkMessages = {
+    'enter_link': enter_link,
+}

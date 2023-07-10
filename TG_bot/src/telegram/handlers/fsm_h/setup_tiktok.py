@@ -7,8 +7,8 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 
-from TG_bot.setup import user_router, bot
-from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
+from TG_bot.setup import user_router
+from TG_bot.src.telegram.buttons.user_btn import many_btns
 from TG_bot.src.telegram.messages.user_msg import MESSAGES, SetUpTikTokMessages
 from database.query.set_up_social_network import db_create_TT_user
 

@@ -14,12 +14,15 @@ start_message = hi_user + '\n' + help_message
 back = '<<< Back'
 empty_request = 'Please, enter something'
 # _____________________________________________________________________________________ main btns
-main_btn_list = ['TikTok', 'Settings🛠️']
+main_btn_list = ['TikTok', 'Download by link', 'Settings🛠️']
 main_input_field = 'Choose one for start'
 
 # _____________________________________________________________________________________ settings btns
 settings_btn_list = ['SetUP TikTok⚙️', 'SetUP Telegram⚙️', 'Support', '🔙 to Main Menu']
 settings_input_field = 'Choose one social network for setUP'
+
+run_list_tt_btns = ['🔄 Run autoposting', '❌']
+
 
 # ________________________________________ Buttons and input fields for admin ________________________________________
 
@@ -73,3 +76,9 @@ which you added➕ in settings🛠.
 In order to start the autopost.
 ⬇️Please, press the button below⬇️
 """
+
+
+# ______________________________________________ Download by link _____________________________________________
+
+enter_link = 'Enter link'
+

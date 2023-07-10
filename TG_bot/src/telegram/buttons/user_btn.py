@@ -27,6 +27,15 @@ def one_inline_btn(text: str, callback_data: str) -> InlineKeyboardBuilder:
     return builder
 
 
+def many_inline_btns(btns_text_list: list, callback_data_list: list, column_count=1) -> InlineKeyboardBuilder:
+    builder = InlineKeyboardBuilder()
+    for txt_btn, callback_data in zip(btns_text_list, callback_data_list):
+        builder.add(types.InlineKeyboardButton(text=txt_btn, callback_data=callback_data))
+    builder.adjust(column_count)
+
+    return builder
+
+
 def edit_markup_custom(btns_text_list: list, txt_input_field: str, column_count=1) -> ReplyKeyboardMarkup:
     builder = ReplyKeyboardBuilder()
     for txt_btn in btns_text_list:

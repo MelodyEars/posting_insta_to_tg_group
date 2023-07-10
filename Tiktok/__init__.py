@@ -1,1 +1,1 @@
-from .tt_output import run_thread_tt
+from .tt_output_autoposting import run_thread_tt

@@ -15,7 +15,7 @@ from SETTINGS import TIKTOK_BROWSER_HEADLESS
 
 
 class TiktokDownloader(BaseClass):
-    def __init__(self, tt_name: str, proxy=None):
+    def __init__(self, tt_name="", proxy=None):
         super().__init__()
         self.tt_name = tt_name
         self.proxy = proxy
@@ -56,8 +56,12 @@ class TiktokDownloader(BaseClass):
 
         return filepath
 
-    def get_info_video(self, video_num: str | int) -> tuple[str, Path]:
-        url_tiktok_video = f'https://www.tiktok.com/@{self.tt_name}/video/{video_num}?lang=en'
+    def get_info_video(self, video_num: str | int = None, url_tiktok_video='') -> tuple[str, Path]:
+        if not url_tiktok_video:
+            url_tiktok_video = f'https://www.tiktok.com/@{self.tt_name}/video/{video_num}?lang=en'
+
+        if not video_num:
+            video_num = uuid4()
 
         # attend site for download video without watermark
         self.DRIVER.get('https://ssstik.io/en')
@@ -102,4 +106,5 @@ class TiktokDownloader(BaseClass):
 
         video_list = list(json_data['ItemList']["user-post"]["list"])
         print(f"Count videos: {len(video_list)}")
+
         return video_list

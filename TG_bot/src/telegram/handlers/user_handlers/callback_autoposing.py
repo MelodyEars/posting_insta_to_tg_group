@@ -7,10 +7,10 @@ from aiogram.filters import Text
 from loguru import logger
 
 from TG_bot.src.telegram.buttons.user_btn import one_inline_btn
-from TG_bot.src.telegram.handlers.btn_task_main_menu import autoposting_tt_inline_btn_task, \
+from TG_bot.src.telegram.handlers.user_handlers.action_tt_to_tg import autoposting_tt_inline_btn_task, \
     stop_autoposting_tt_inline_btn_task
 from TG_bot.src.telegram.messages.user_msg import ProcessActions
-from TG_bot.src.telegram.handlers.user_handlers import user_router
+from TG_bot.src.telegram.handlers.user_handlers.main_user_handlers import user_router
 
 
 from database.query.btns_main_menu import db_get_tt_name_by_tg_id

@@ -5,8 +5,8 @@ from aiogram.types import Message
 from aiogram.filters import Command
 from loguru import logger
 
-from TG_bot.setup import user_router, bot
-from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns, one_inline_btn
+from TG_bot.setup import user_router
+from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns, one_inline_btn, many_inline_btns
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
 from TG_bot.src.telegram.messages.user_msg import (MESSAGES, SetUpTikTokMessages, SetUpTelegramMessages,
@@ -50,9 +50,10 @@ async def back_handl(message: Message):
 @user_router.message(F.text.in_(MESSAGES['main_btn_list']))
 async def starter_work(message: Message):
     logger.info("starter_work")
-    if message.text == MESSAGES['main_btn_list'][0]:  # TikTok
+    # _______________________________________________________________________________   TikTok
+    if message.text == MESSAGES['main_btn_list'][0]:
         # TODO tiktokapi not have video on tiktok page
-        logger.info("TikTok")
+        logger.info(f"TikTok {message.from_user.username}")
         obj_tiktok_user: TikTokUser = db_get_tt_name_by_tg_id(message.chat.id)
         group_chat_id = get_user_by_tg_id(message.chat.id).group_chat_id
 
@@ -60,20 +61,33 @@ async def starter_work(message: Message):
             if not obj_tiktok_user.autoposting_tt:
                 # still not run autoposting
                 logger.info("still not run autoposting")
-                builder = one_inline_btn("🔄 Run autoposting", "start_tt_auto")
-                await message.answer(ProcessActions["msg_start_autoposting"], reply_markup=builder.as_markup())
+
+                list_btns = ["🔄 Run autoposting", "📥 Download by link"]
+                list_callback = ["start_tt_auto", "download_by_link_tt"]
 
             else:
                 # already run autoposting
                 logger.info("already run autoposting")
-                builder = one_inline_btn("❌ Turn OFF autoposting", "end_tt_auto")
-                await message.answer("Tiktok was started", reply_markup=builder.as_markup())
+                list_btns = ["❌ Turn OFF autoposting", "📥 Download by link"]
+                list_callback = ["stop_tt_auto", "download_by_link_tt"]
+
+            builder = many_inline_btns(list_btns, list_callback)
+            await message.answer(ProcessActions["msg_start_autoposting"], reply_markup=builder.as_markup())
+
+
 
         else:
             await message.answer(ErrorMessages['request_attend_settings'] + 'Tiktok')
             # Todo add inline-button for setup tiktok and telegram
 
-    elif message.text == MESSAGES['main_btn_list'][1]:  # Settings
+    # _______________________________________________________________________________  Download by link
+    elif message.text == MESSAGES['main_btn_list'][1]:
+        builder = one_inline_btn("TikTok", "download_by_link_tt")
+        await message.answer(message.text, reply_markup=builder.as_markup())
+
+    # _______________________________________________________________________________  Settings
+    elif message.text == MESSAGES['main_btn_list'][2]:
+        logger.info(f"Setting {message.from_user.username}")
         await message.answer(
             text=message.text,
             reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
