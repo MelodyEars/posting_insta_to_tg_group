@@ -62,6 +62,7 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
 
         link = struct_data.link
         task = asyncio.create_task(run_thread_tt_dwnld_video(group_chat_id=message.chat.id, link=link))
+        await task
 
     else:
         # if not match
@@ -73,4 +74,4 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
                               ''')
 
     await cancel_handler(message, state)
-    await task
+

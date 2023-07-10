@@ -75,4 +75,4 @@ async def answer_login(message: Message, state: FSMContext):
     except TelegramBadRequest:
         await cancel_handler(message, state, SetUpTelegramMessages['send_username'])
 
-    await cancel_handler(message, state, SetUpTelegramMessages['success'])
+    await cancel_handler(message, state, SetUpTelegramMessages['success_tg'])

@@ -38,12 +38,19 @@ success = 'Successfully!'
 # ______________________________________________ Questions Setup tiktok ________________________________________________
 
 quest_tiktok_login = 'Enter your login for TikTok(without @)'
+success_tt = '''
+Successfully!
+Don't forget to add telegram chanel name in settings🛠️ and add bot as admin👮‍♂️
+'''
 
 # ______________________________________________ Questions Setup telegram _____________________________________________
 
 nickname_chanel = 'Enter your nickname chanel as @chanel_name'
 send_username = 'Please, send your chanel username as @chanel_username'
-
+success_tg = '''
+Successfully! 
+Don't forget to add tiktok name in settings🛠️
+'''
 
 # ______________________________________________ Handling Error _____________________________________________
 request_attend_settings = '''

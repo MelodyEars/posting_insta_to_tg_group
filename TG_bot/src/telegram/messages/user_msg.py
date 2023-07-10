@@ -49,12 +49,12 @@ SetUpInstaMessages: SetUpInstaMessages = {
 # ______________________________________________ Questions Setup tiktok ________________________________________________
 class SetUpTikTokMessages(TypedDict):
     quest_tiktok_login: str
-    success: str
+    success_tt: str
 
 
 SetUpTikTokMessages: SetUpTikTokMessages = {
     'quest_tiktok_login': quest_tiktok_login,
-    'success': success
+    'success_tt': success_tt
 }
 
 
@@ -62,13 +62,13 @@ SetUpTikTokMessages: SetUpTikTokMessages = {
 class SetUpTelegramMessages(TypedDict):
     nickname_chanel: str
     send_username: str
-    success: str
+    success_tg: str
 
 
 SetUpTelegramMessages: SetUpTelegramMessages = {
     'nickname_chanel': nickname_chanel,
     'send_username': send_username,
-    'success': success,
+    'success_tg': success_tg,
 }
 
 

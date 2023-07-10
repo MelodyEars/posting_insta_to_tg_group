@@ -65,7 +65,7 @@ async def answer_login(message: Message, state: FSMContext):
 
     await state.clear()
     await message.reply(
-        SetUpTikTokMessages['success'],
+        SetUpTikTokMessages['success_tt'],
         reply_markup=many_btns(btns_text_list=MESSAGES['settings_btn_list'],
                                txt_input_field=MESSAGES['settings_input_field'])
     )
