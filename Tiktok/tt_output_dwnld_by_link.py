@@ -28,7 +28,7 @@ async def run_thread_tt_dwnld_video(group_chat_id, link):
     await bot.send_video(
         chat_id=group_chat_id,
         video=video_from_pc,
-        caption=name_video + "\n\n __Best regards!__ @MessHub_bot"
+        caption=name_video + "\n\n Best regards! @MessHub_bot"
     )
 
     logger.info(f"Delete video {video_path}")
