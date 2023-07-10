@@ -50,12 +50,17 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
     logger.info("link for download tiktok video: " + link)
 
     # Регулярний вираз для отримання номера відео та перевірки шаблону
-    pattern = r"https:\/\/www\.tiktok\.com\/@.+?\/video\/(\d+)\/?$"
+    pattern_comp = r"https:\/\/www\.tiktok\.com\/@.+?\/video\/(\d+)\/?$"
+
+    # 'https://vm.tiktok.com/ZM29gPj5W/'
+    pattern_mobile = r"https:\/\/(?:www\.)?vm\.tiktok\.com\/([a-zA-Z0-9]+)\/?$"
+
 
     # Застосовуємо регулярний вираз до посилання
-    match = re.search(pattern, link)
+    match_comp_link = re.search(pattern_comp, link)
+    math_mobile_link = re.search(pattern_mobile, link)
 
-    if match:
+    if match_comp_link or math_mobile_link:
         await state.update_data(link=link)
         data = await state.get_data()
         struct_data = StructData(**data)
