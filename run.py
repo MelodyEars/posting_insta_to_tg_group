@@ -76,5 +76,3 @@ if __name__ == '__main__':
 	)
 
 	main()
-
-# TODO update information setup get or create and then  update nickname

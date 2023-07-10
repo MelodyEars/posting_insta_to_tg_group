@@ -31,13 +31,5 @@ async def run_thread_tt_dwnld_video(group_chat_id, link):
         caption=name_video + "\n\n __Best regards!__ @MessHub_bot"
     )
 
-    logger.info(f"Send video as document {video_path}")
-    document = InputFile(str(video_path))
-    await bot.send_document(
-        chat_id=group_chat_id,
-        document=document,
-        caption=name_video + "\n\n __Best regards!__ @MessHub_bot"
-    )
-
     logger.info(f"Delete video {video_path}")
     video_path.unlink()
