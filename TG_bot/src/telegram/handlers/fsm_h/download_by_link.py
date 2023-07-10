@@ -38,7 +38,7 @@ async def cancel_handler(message: Message, state: FSMContext, text=''):
 
     else:
         await message.answer(
-            text,
+            '__@MessHub_bot__',
             reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
                                    txt_input_field=MESSAGES['main_input_field'])
         )
@@ -71,7 +71,6 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
                              text='''
                              Please, send correct link as
                               https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd
-                              '''
-                             )
+                              ''')
 
     await cancel_handler(message, state)
