@@ -67,6 +67,8 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
 
         link = struct_data.link
         task = asyncio.create_task(run_thread_tt_dwnld_video(group_chat_id=message.chat.id, link=link))
+        await cancel_handler(message, state, text="Your link handling...")
+
         await task
 
     else:
@@ -78,4 +80,4 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
                               https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd
                               ''')
 
-    await cancel_handler(message, state)
+
