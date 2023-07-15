@@ -15,7 +15,7 @@ async def watch_connection_channels(message: Message):
     if tt_chanel and tg_chanel:
         logger.info(f'{tg_username} tg = {tg_chanel} and tt = {tt_chanel}' )
         msg = f"""
-                TikTok ➡️ Telegram /n @{tt_chanel} ➡️ {tg_chanel}  
+                TikTok ➡️ Telegram \n @{tt_chanel} ➡️ {tg_chanel}  
                """
     else:
         logger.error(f"{tg_username} not registration their channels")
