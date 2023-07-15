@@ -69,7 +69,7 @@ async def starter_work(message: Message):
                 # already run autoposting
                 logger.info("already run autoposting")
                 list_btns = ["❌ Turn OFF autoposting", "📥 Download by link"]
-                list_callback = ["stop_tt_auto", "download_by_link_tt"]
+                list_callback = ["end_tt_auto", "download_by_link_tt"]
 
             builder = many_inline_btns(list_btns, list_callback)
             await message.answer(ProcessActions["msg_start_autoposting"], reply_markup=builder.as_markup())
