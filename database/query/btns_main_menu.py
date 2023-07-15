@@ -1,5 +1,4 @@
 from loguru import logger
-from peewee import DoesNotExist
 
 from SETTINGS import db
 from database.tables import TikTokVideo, TikTokUser, TelegramUser

@@ -16,7 +16,7 @@ from database.tables import create_tables_user_tg
 from TG_bot.src.telegram.middleware.admin_only import AdminOnly
 from TG_bot.src.telegram.middleware.check_users import CheckUser
 from TG_bot.src.telegram.handlers.admin_handlers import admin_router
-from TG_bot.src.telegram.handlers.user_handlers.callback_donload_by_link import user_router
+from TG_bot.src.telegram.handlers.user_handlers.callbacks.callback_donload_by_link import user_router
 
 
 async def _start():

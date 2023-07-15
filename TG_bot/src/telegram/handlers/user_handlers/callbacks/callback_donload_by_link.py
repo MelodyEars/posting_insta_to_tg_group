@@ -6,7 +6,7 @@ from loguru import logger
 
 from TG_bot.src.telegram.buttons.user_btn import one_btn
 from TG_bot.src.telegram.handlers.fsm_h.download_by_link import TikTokOneVideo
-from TG_bot.src.telegram.handlers.user_handlers.callback_autoposing import user_router
+from TG_bot.src.telegram.handlers.user_handlers.callbacks.callback_autoposing import user_router
 from TG_bot.src.telegram.messages.user_msg import DownloadByLinkMessages, MESSAGES
 
 

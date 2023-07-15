@@ -26,23 +26,6 @@ async def send_msg_from_db_to_chat(group_chat_id: int):
         db_update_uploaded_video(obj_video)
         Path(obj_video.path_video).unlink()  # del video from folder /tiktok_video
 
-#
-# async def tiktok_btn_task(message: Message, obj_tiktok_user: TikTokUser, group_chat_id: int):
-#     await message.answer(ProcessActions['begin_download'], )
-#
-#     # run browser and add downloaded video to db
-#     msg = await run_thread_tt(obj_tiktok_user)
-#     await message.answer(msg)
-#
-#     if msg != ProcessActions['sent_success']:
-#         return
-#
-#     await message.answer(ProcessActions['download_success'])
-#     # send video to telegram chat
-#     await send_msg_from_db_to_chat(group_chat_id)
-#     await message.answer(ProcessActions['sent_success'])
-#
-
 
 async def autoposting_tt_inline_btn_task(obj_tiktok_user: TikTokUser, group_chat_id: int):
     """

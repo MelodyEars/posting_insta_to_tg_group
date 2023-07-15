@@ -18,7 +18,7 @@ main_btn_list = ['TikTok', 'Download by link', 'Settings🛠️']
 main_input_field = 'Choose one for start'
 
 # _____________________________________________________________________________________ settings btns
-settings_btn_list = ['SetUP TikTok⚙️', 'SetUP Telegram⚙️', 'Support', '🔙 to Main Menu']
+settings_btn_list = ['SetUP TikTok⚙️', 'SetUP Telegram⚙️', 'Your connection channels📢', 'Support', '🔙 to Main Menu']
 settings_input_field = 'Choose one social network for setUP'
 
 run_list_tt_btns = ['🔄 Run autoposting', '❌']

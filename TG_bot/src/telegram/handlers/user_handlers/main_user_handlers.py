@@ -9,6 +9,7 @@ from TG_bot.setup import user_router
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns, one_inline_btn, many_inline_btns
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
+from TG_bot.src.telegram.handlers.user_handlers.act_by_hanler.watcher_chanels import watch_connection_channels
 from TG_bot.src.telegram.messages.user_msg import (MESSAGES, SetUpTikTokMessages, SetUpTelegramMessages,
                                                    ErrorMessages, ProcessActions)
 from database.query.btns_main_menu import db_get_tt_name_by_tg_id
@@ -74,8 +75,6 @@ async def starter_work(message: Message):
             builder = many_inline_btns(list_btns, list_callback)
             await message.answer(ProcessActions["msg_start_autoposting"], reply_markup=builder.as_markup())
 
-
-
         else:
             await message.answer(ErrorMessages['request_attend_settings'] + 'Tiktok')
             # Todo add inline-button for setup tiktok and telegram
@@ -105,12 +104,15 @@ async def setup_social_network(message: Message,  state: FSMContext):
         await state.set_state(SetUpTelegram.link_your_chanel)
         await message.reply(SetUpTelegramMessages['nickname_chanel'], reply_markup=one_btn(MESSAGES['back']))
 
-    elif message.text == MESSAGES['settings_btn_list'][2]:  # <<< Back
+    elif message.text == MESSAGES['settings_btn_list'][2]:  # settings_btn_list
+        await watch_connection_channels(message)
+
+    elif message.text == MESSAGES['settings_btn_list'][3]:  # Support
         await message.answer(
             'Contact us: \n https://t.me/+mbJKlsjGfmE5ZTdi',
             reply_markup=many_btns(btns_text_list=MESSAGES['main_btn_list'],
                                    txt_input_field=MESSAGES['main_input_field'])
         )
 
-    elif message.text == MESSAGES['settings_btn_list'][3]:  # <<< Back
+    elif message.text == MESSAGES['settings_btn_list'][4]:  # <<< Back
         await back_handl(message)
