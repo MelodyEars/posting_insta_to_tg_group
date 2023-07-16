@@ -29,6 +29,14 @@ class TelegramUser(BaseModel):
         db_table = 'telegram_users'
 
 
+# class AdminData(BaseModel):
+#     ads_link_msg_download_tt_video = pw.CharField(null=True, default=True)
+#     ads_link_msg_autoposting_tt = pw.CharField(null=True, default=True)
+#
+#     class Meta:
+#         db_table = 'admin_data'
+
+
 class TikTokUser(BaseModel):
     tg_id_user = pw.ForeignKeyField(TelegramUser, backref="telegram_users", on_delete='CASCADE')
     username = pw.CharField(max_length=100, null=True, default=None)

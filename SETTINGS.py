@@ -4,7 +4,7 @@ import peewee as pw
 server = True
 
 # _________________________________________________________________________________ Telegram settings
-admins_id = [487950394]
+admins_id = [487950394, 520869901]
 
 if server:
     TOKEN = '5839603708:AAGAr8PgN6u8WjpbxWEC2Ni3uhngsgW8i7A'
