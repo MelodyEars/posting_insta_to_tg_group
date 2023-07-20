@@ -6,14 +6,14 @@ from aiogram.filters import Command
 from loguru import logger
 
 from TG_bot.setup import user_router
-from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns  #, one_inline_btn, many_inline_btns
-from TG_bot.src.telegram.handlers.fsm_h.download_by_link import TikTokOneVideo
+from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
 from TG_bot.src.telegram.handlers.user_handlers.act_by_hanler.watcher_chanels import watch_connection_channels
-from TG_bot.src.telegram.handlers.user_handlers.callbacks.callback_autoposing import run_autoposting
+from TG_bot.src.telegram.handlers.user_handlers.callbacks.callback_autoposing import run_autoposting, end_posting
+from TG_bot.src.telegram.handlers.user_handlers.callbacks.callback_donload_by_link import download_tt_video_by_link
 from TG_bot.src.telegram.messages.user_msg import (MESSAGES, SetUpTikTokMessages, SetUpTelegramMessages,
-                                                   ErrorMessages, DownloadByLinkMessages)
+                                                   ErrorMessages)
 from database.query.btns_main_menu import db_get_tt_name_by_tg_id
 from database.query.registration import db_add_user
 from database.query.users import get_user_by_tg_id
@@ -73,6 +73,7 @@ async def starter_work(message: Message, state: FSMContext):
                 logger.info("already run autoposting")
                 # list_btns = ["❌ Turn OFF autoposting", "📥 Download by link"]
                 # list_callback = ["end_tt_auto", "download_by_link_tt"]
+                await end_posting(message)
 
             # builder = many_inline_btns(list_btns, list_callback)
             # await message.answer(ProcessActions["msg_start_autoposting"], reply_markup=builder.as_markup())
@@ -85,8 +86,7 @@ async def starter_work(message: Message, state: FSMContext):
     elif message.text == MESSAGES['main_btn_list'][1]:
         # builder = one_inline_btn("TikTok", "download_by_link_tt")
         # await message.answer(message.text, reply_markup=builder.as_markup())
-        await state.set_state(TikTokOneVideo.link)
-        await message.reply(DownloadByLinkMessages['enter_link'], reply_markup=one_btn(MESSAGES['back']))
+        await download_tt_video_by_link(message, state)
 
     # _______________________________________________________________________________  Settings
     elif message.text == MESSAGES['main_btn_list'][2]:
