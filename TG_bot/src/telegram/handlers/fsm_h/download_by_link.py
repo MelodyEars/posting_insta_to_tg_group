@@ -6,6 +6,7 @@ from aiogram import F
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
+
 from loguru import logger
 
 from TG_bot.setup import user_router
@@ -75,10 +76,10 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
         # await message.answer()
     else:
         # if not match
-        await cancel_handler(message, state, text='''
+        await cancel_handler(message, state, text=f'''
         Please, send correct link as
-        <code>https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd</code>
+        https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd
         or
-        <code>https://vm.tiktok.com/ZM29gPj5W/</code>''')
+        https://vm.tiktok.com/ZM29gPj5W/''')
 
 
