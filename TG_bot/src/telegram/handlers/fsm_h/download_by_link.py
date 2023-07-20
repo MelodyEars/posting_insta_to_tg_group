@@ -24,7 +24,7 @@ class StructData(NamedTuple):
 
 
 @user_router.message(F.text == MESSAGES['back'])
-async def cancel_handler(message: Message, state: FSMContext, text=''):
+async def cancel_handler_download_one_video(message: Message, state: FSMContext, text=''):
     current_state = await state.get_state()
     if current_state is None:
         return
@@ -69,14 +69,14 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
         task = asyncio.create_task(run_thread_tt_dwnld_video(group_chat_id=message.chat.id, link=link))
 
         # send msg
-        await cancel_handler(message, state, text="Your video is downloading...")
+        await cancel_handler_download_one_video(message, state, text="Your video is downloading...")
 
         await task
         # TODO add ads from adnmin link
         # await message.answer()
     else:
         # if not match
-        await cancel_handler(message, state, text=f'''
+        await cancel_handler_download_one_video(message, state, text=f'''
         Please, send correct link as
         https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd
         or
