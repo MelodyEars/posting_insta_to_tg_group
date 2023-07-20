@@ -55,7 +55,6 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
     # 'https://vm.tiktok.com/ZM29gPj5W/'
     pattern_mobile = r"https:\/\/(?:www\.)?vm\.tiktok\.com\/([a-zA-Z0-9]+)\/?$"
 
-
     # Застосовуємо регулярний вираз до посилання
     match_comp_link = re.search(pattern_comp, link)
     math_mobile_link = re.search(pattern_mobile, link)
@@ -76,13 +75,10 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
         # await message.answer()
     else:
         # if not match
-        return await cancel_handler(message,
-                                    state,
-                                    text='''
-                                     Please, send correct link as
-                                      https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd 
-                                       or
-                                        https://vm.tiktok.com/ZM29gPj5W/
-                                         ''')
+        await cancel_handler(message, state, text='''
+        Please, send correct link as
+        <code>https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd</code>
+        or
+        <code>https://vm.tiktok.com/ZM29gPj5W/</code>''')
 
 

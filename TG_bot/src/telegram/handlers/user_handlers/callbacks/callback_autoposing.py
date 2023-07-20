@@ -71,8 +71,6 @@ async def run_autoposting(message: Message):
 #     await callback.answer()
 
 async def end_posting(message: Message):
-    # message = callback.message
-
     id_chat_user = message.chat.id
     await stop_autoposting_tt_inline_btn_task(id_chat_user)
 
