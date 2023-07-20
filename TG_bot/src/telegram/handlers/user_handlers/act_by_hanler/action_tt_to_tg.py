@@ -50,7 +50,7 @@ async def autoposting_tt_inline_btn_task(obj_tiktok_user: TikTokUser, group_chat
             await send_msg_from_db_to_chat(group_chat_id)
             await bot.send_message(chat_id=group_chat_id, text=ProcessActions['sent_success'])
 
-        logger.info(f"autoposting sleep for {obj_tiktok_user}")
+        logger.info(f"autoposting sleep for {obj_tiktok_user.username}")
         time.sleep(60 * 5)  # 5 min
 
         autoposting = db_get_status_autopsting(obj_tiktok_user)

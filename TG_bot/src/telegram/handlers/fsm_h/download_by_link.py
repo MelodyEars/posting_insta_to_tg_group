@@ -53,6 +53,7 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
     # Регулярний вираз для отримання номера відео та перевірки шаблону
     pattern_comp = r"https:\/\/www\.tiktok\.com\/@.+?\/video\/(\d+)\/?$"
 
+
     # 'https://vm.tiktok.com/ZM29gPj5W/'
     pattern_mobile = r"https:\/\/(?:www\.)?vm\.tiktok\.com\/([a-zA-Z0-9]+)\/?$"
 
@@ -78,8 +79,7 @@ async def answer_wish_tt_video_link(message: Message, state: FSMContext):
         # if not match
         await cancel_handler_download_one_video(message, state, text=f'''
         Please, send correct link as
-        https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd
-        or
         https://vm.tiktok.com/ZM29gPj5W/''')
-
+        # https://www.tiktok.com/@kherson2day/video/7252772763570539782?_t=8doziYwEvRd
+        #         or
 
