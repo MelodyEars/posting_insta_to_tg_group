@@ -1,17 +1,17 @@
 import asyncio
-from contextlib import suppress
+# from contextlib import suppress
 
-from aiogram import types
-from aiogram.exceptions import TelegramBadRequest
-from aiogram.filters import Text
+# from aiogram import types
+# from aiogram.exceptions import TelegramBadRequest
+# from aiogram.filters import Text
 from aiogram.types import Message
 from loguru import logger
 
-from TG_bot.src.telegram.buttons.user_btn import one_inline_btn, many_btns
+from TG_bot.src.telegram.buttons.user_btn import many_btns
 from TG_bot.src.telegram.handlers.user_handlers.act_by_hanler.action_tt_to_tg import autoposting_tt_inline_btn_task, \
     stop_autoposting_tt_inline_btn_task
 from TG_bot.src.telegram.messages.user_msg import ProcessActions, MESSAGES
-from TG_bot.src.telegram.handlers.user_handlers.main_user_handlers import user_router
+# from TG_bot.src.telegram.handlers.user_handlers.main_user_handlers import user_router
 
 
 from database.query.btns_main_menu import db_get_tt_name_by_tg_id
@@ -69,8 +69,6 @@ async def run_autoposting(message: Message):
 #         await message.edit_text(ProcessActions['stop_autoposting'], reply_markup=builder.as_markup())
 #
 #     await callback.answer()
-
-
 
 async def end_posting(message: Message):
     # message = callback.message
