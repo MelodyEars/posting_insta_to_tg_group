@@ -14,7 +14,7 @@ start_message = hi_user + '\n' + help_message
 back = '<<< Back'
 empty_request = 'Please, enter something'
 # _____________________________________________________________________________________ main btns
-main_btn_list = ['TikTok', 'Download by link', 'Settings🛠️']
+main_btn_list = ['Autoposting TikTok', 'Download Video', 'Settings🛠️']
 main_input_field = 'Choose one for start'
 
 # _____________________________________________________________________________________ settings btns
@@ -69,7 +69,8 @@ download_success = 'Download successfully!'
 sent_success = 'Sent to your channel!'
 same_video = "Some videos were uploaded to the telegram channel"
 start_autoposting = 'Start autoposting'
-stop_autoposting = 'Stop autoposting'
+stop_autoposting = 'You stopped autoposting'
+
 msg_start_autoposting = """
 WARNING❗️
 Don't forget to make this bot @MessHub_bot
@@ -80,10 +81,9 @@ which you added➕ in settings🛠.
 адміном вашого телеграм каналу,
 який ви додали➕ в налаштуваннях🛠.
 
-In order to start the autopost.
-⬇️Please, press the button below⬇️
 """
-
+# 'In order to start the autopost.
+# ⬇️Please, press the button below⬇️'
 
 # ______________________________________________ Download by link _____________________________________________
 

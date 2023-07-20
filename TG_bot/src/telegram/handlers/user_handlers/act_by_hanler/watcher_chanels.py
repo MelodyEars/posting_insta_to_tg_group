@@ -13,8 +13,8 @@ async def watch_connection_channels(message: Message):
     chat_id = message.chat.id
     tt_chanel, tg_chanel = db_chanels_by_id_chat(chat_id)
     if tt_chanel and tg_chanel:
-        logger.info(f'{tg_username} tg = {tg_chanel} and tt = {tt_chanel}' )
-        msg = f"✓TikTok: https://vm.tiktok.com/@{tt_chanel}\n✓Telegram: {tg_chanel}"
+        logger.info(f'{tg_username} tg = {tg_chanel} and tt = {tt_chanel}')
+        msg = f"✓TikTok: <code>https://vm.tiktok.com/@{tt_chanel}</code>\n✓Telegram: {tg_chanel}"
 
     else:
         logger.error(f"{tg_username} not registration their channels")
