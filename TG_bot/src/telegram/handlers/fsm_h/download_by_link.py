@@ -9,7 +9,7 @@ from aiogram.types import Message
 
 from loguru import logger
 
-from TG_bot.setup import user_router
+from TG_bot.src.telegram.handlers.user_handlers.main_user_handlers import user_router
 from TG_bot.src.telegram.buttons.user_btn import many_btns
 from TG_bot.src.telegram.messages.user_msg import MESSAGES
 from Tiktok.tt_output_dwnld_by_link import run_thread_tt_dwnld_video
