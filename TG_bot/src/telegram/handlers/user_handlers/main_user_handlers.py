@@ -5,7 +5,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 from loguru import logger
 
-from TG_bot.setup import user_router
+from TG_bot.src.telegram.handlers.fsm_h.download_by_link import user_router
 from TG_bot.src.telegram.buttons.user_btn import one_btn, many_btns
 from TG_bot.src.telegram.handlers.fsm_h.setup_telegram import SetUpTelegram
 from TG_bot.src.telegram.handlers.fsm_h.setup_tiktok import SetUpTikTok
