@@ -54,18 +54,18 @@ Don't forget to add tiktok name in settings🛠️
 
 # ______________________________________________ Handling Error _____________________________________________
 request_attend_settings = '''
-🔒Please, set up⚙️ your social networks first.
-Click settings🛠️ and follow the steps. 
-Check Telegram or TikTok. 
-
-🔒Спочатку налаштуйте⚙️ свої соціальні мережі.
-Натисніть налаштування🛠️ та виконайте вказівки.
-Перевірте Telegram або
-
-
 ✅Autoposting Started!
+...
+WARNING❗️
+Don't forget to make this bot @MessHub_bot
+an admin of your telegram channel,
+which you added➕ in settings🛠.
+
+Важливо❗️ не забудьте зробити бота @MessHub_bot
+адміном вашого телеграм каналу,
+який ви додали➕ в налаштуваннях🛠.
 •••
-Try it Free! 👉ChatGPT&Midjorney
+Try it Free! 👉ChatGPT&Midjorney @GPTChaTMBot
 '''
 
 # ______________________________________________ Process Actions _____________________________________________
