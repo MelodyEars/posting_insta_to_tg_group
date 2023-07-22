@@ -14,7 +14,7 @@ start_message = hi_user + '\n' + help_message
 back = '<<< Back'
 empty_request = 'Please, enter something'
 # _____________________________________________________________________________________ main btns
-main_btn_list = ['Autoposting TikTok', 'Download Video', 'Settings🛠️']
+main_btn_list = ['🔄Autoposting TikTok', '⏬Download Video', '⚙️Settings']
 main_input_field = 'Choose one for start'
 
 # _____________________________________________________________________________________ settings btns
@@ -90,6 +90,7 @@ which you added➕ in settings🛠.
 адміном вашого телеграм каналу,
 який ви додали➕ в налаштуваннях🛠.
 
+Try it Free! 👉ChatGPT&Midjorney @GPTChaTMBot
 """
 # 'In order to start the autopost.
 # ⬇️Please, press the button below⬇️'
