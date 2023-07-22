@@ -53,7 +53,7 @@ Don't forget to add tiktok name in settings🛠️
 '''
 
 # ______________________________________________ Handling Error _____________________________________________
-request_attend_settings = '''
+request_attend_settings = '''\n
 ✅Autoposting Started!
 ...
 WARNING❗️
