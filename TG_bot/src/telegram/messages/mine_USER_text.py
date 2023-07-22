@@ -53,9 +53,9 @@ Don't forget to add tiktok name in settings🛠️
 '''
 
 # ______________________________________________ Handling Error _____________________________________________
-request_attend_settings = '''\n
+request_attend_settings = '''
 ✅Autoposting Started!
-...
+
 WARNING❗️
 Don't forget to make this bot @MessHub_bot
 an admin of your telegram channel,
@@ -64,7 +64,7 @@ which you added➕ in settings🛠.
 Важливо❗️ не забудьте зробити бота @MessHub_bot
 адміном вашого телеграм каналу,
 який ви додали➕ в налаштуваннях🛠.
-•••
+
 Try it Free! 👉ChatGPT&Midjorney @GPTChaTMBot
 '''
 
