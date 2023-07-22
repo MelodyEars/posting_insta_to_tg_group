@@ -61,6 +61,11 @@ Check Telegram or TikTok.
 🔒Спочатку налаштуйте⚙️ свої соціальні мережі.
 Натисніть налаштування🛠️ та виконайте вказівки.
 Перевірте Telegram або
+
+
+✅Autoposting Started!
+•••
+Try it Free! 👉ChatGPT&Midjorney
 '''
 
 # ______________________________________________ Process Actions _____________________________________________
@@ -69,7 +74,11 @@ download_success = 'Download successfully!'
 sent_success = 'Sent to your channel!'
 same_video = "Some videos were uploaded to the telegram channel"
 start_autoposting = 'Start autoposting'
-stop_autoposting = 'You stopped autoposting'
+stop_autoposting = '''
+⛔️Autoposting Stopped!
+•••
+Try it Free! 👉ChatGPT&Midjorney @GPTChaTMBot
+'''
 
 msg_start_autoposting = """
 WARNING❗️
