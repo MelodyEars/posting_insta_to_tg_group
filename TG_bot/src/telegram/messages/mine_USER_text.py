@@ -77,15 +77,15 @@ Try it Free! 👉ChatGPT&Midjorney @GPTChaTMBot
 
 msg_start_autoposting = """
 ✅Autoposting Started!
-...
+•••
 WARNING❗️
 Don't forget to make this bot @MessHub_bot
 an admin of your telegram channel,
-which you added➕ in settings🛠.
+which you added in settings🛠️
 
 Важливо❗️ не забудьте зробити бота @MessHub_bot
 адміном вашого телеграм каналу,
-який ви додали➕ в налаштуваннях🛠.
+який ви додали в налаштуваннях🛠️
 •••
 Try it Free! 👉ChatGPT&Midjorney @GPTChaTMBot
 """
