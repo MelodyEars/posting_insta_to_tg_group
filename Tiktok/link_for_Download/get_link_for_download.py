@@ -7,6 +7,7 @@ from uuid import uuid4
 import requests
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
+from loguru import logger
 
 from selenium.webdriver.common.by import By
 
@@ -96,7 +97,11 @@ class TiktokDownloader(BaseClass):
                 # time.sleep(5)
 
         # Отримуємо вміст елемента
-        content = self.elem_exists("SIGI_STATE", by=By.ID, return_xpath=True).get_attribute("innerHTML")
+        try:
+            content = self.elem_exists("SIGI_STATE", by=By.ID, return_xpath=True).get_attribute("innerHTML")
+        except AttributeError:  # AttributeError: 'bool' object has no attribute 'get_attribute'
+            logger.error('AttributeError: "SIGI_STATE" object has no attribute "innerHTML"')
+            return self.get_all_video_by_tiktokname(scroll=scroll)
 
         # Створюємо об'єкт BeautifulSoup для парсингу HTML
         soup = BeautifulSoup(content, "html.parser")
