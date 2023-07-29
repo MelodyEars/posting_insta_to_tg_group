@@ -41,6 +41,27 @@ def removeCDC(driver):
     )
 
 
+class Chrome(uc.Chrome):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.get = None
+
+    def get(self, url):
+        # block js execution
+        self.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": "alert();"})
+        # but let get(url) immediately return
+        super().get(url)
+        # resume js execution
+        self.switch_to.alert.accept()
+        # immediately stop and restart the service to avoid timings detection
+        self.reconnect()
+        # this is only needed once per session, is it ?
+        self.get = super().get
+
+        # driver.execute_script("""setTimeout(() => window.location.href="https://www.bet365.com", 100)""");
+
+
 class EnhancedActionChains(ActionChains):
     def send_keys_1by1(self, keys_to_send, time_s=0.2):
         typing = keys_to_typing(keys_to_send)
@@ -60,13 +81,17 @@ class BaseClass:
         self.DRIVER = uc.Chrome
 
     def _set_up_driver(self, headless=False):
+        options = uc.ChromeOptions()
+
+        options.add_argument("--incognito")
 
         your_options = {
+            "options": options,
             "headless": headless,
             "browser_executable_path": executable_path,
             "user_multi_procs": True,
             "use_subprocess": False,
-            "version_main": google_version
+            "version_main": google_version,
         }
 
         # if not profile or user_data_dir == incognito
@@ -76,6 +101,7 @@ class BaseClass:
         self.action = EnhancedActionChains(self.DRIVER)
 
         self.DRIVER.maximize_window()
+        self.DRIVER.delete_cookie()
 
         return self.DRIVER
 
