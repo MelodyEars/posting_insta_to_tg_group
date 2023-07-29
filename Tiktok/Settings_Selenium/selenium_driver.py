@@ -101,7 +101,7 @@ class BaseClass:
         self.action = EnhancedActionChains(self.DRIVER)
 
         self.DRIVER.maximize_window()
-        self.DRIVER.delete_cookie()
+        self.DRIVER.delete_all_cookies()
 
         return self.DRIVER
 
