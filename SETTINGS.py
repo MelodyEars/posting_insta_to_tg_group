@@ -50,3 +50,14 @@ if server:
     # executable_path = None
 else:
     executable_path = None
+
+
+# _____________________________________________________________________________________ Proxy settings
+
+PROXY: dict = {
+    'host': 'de-1.stableproxy.com',
+    'port': 11001,
+    'user': 'AjYTI0_0',
+    'password': 'wARRqrk6Dv5T',
+    #'proxy_type': 'socks5',
+}

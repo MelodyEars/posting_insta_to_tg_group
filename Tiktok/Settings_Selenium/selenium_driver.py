@@ -8,49 +8,17 @@ from urllib3.exceptions import ProtocolError
 import undetected_chromedriver as uc
 
 from loguru import logger
-from requests import ReadTimeout
+from requests import ReadTimeout, JSONDecodeError
 
 from selenium.common.exceptions import TimeoutException, StaleElementReferenceException, NoSuchElementException, \
     ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.utils import keys_to_typing
 
-from SETTINGS import executable_path, google_version
-
-
-def removeCDC(driver):
-    cdc_props: list[str] = driver.execute_script(
-        """
-        let objectToInspect = window,
-            result = [];
-        while(objectToInspect !== null)
-        { result = result.concat(Object.getOwnPropertyNames(objectToInspect));
-          objectToInspect = Object.getPrototypeOf(objectToInspect); }
-        return result.filter(i => i.match(/^[a-z]{3}_[a-z]{22}_.*/i))
-        """
-    )
-    if len(cdc_props) < 1:
-        return
-    cdc_props_js_array = "[" + ", ".join('"' + p + '"' for p in cdc_props) + "]"
-    driver.execute_cdp_cmd(
-        cmd="Page.addScriptToEvaluateOnNewDocument",
-        cmd_args={"source": f"{cdc_props_js_array}.forEach(p => delete window[p] && console.log('removed', p));"},
-    )
-
-
-class EnhancedActionChains(ActionChains):
-    def send_keys_1by1(self, keys_to_send, time_s=0.2):
-        typing = keys_to_typing(keys_to_send)
-
-        for key in typing:
-            self.key_down(key)
-            self.key_up(key)
-            self.w3c_actions.key_action.pause(time_s)
-
-        return self
+from SETTINGS import executable_path, google_version, PROXY
+from Tiktok.Settings_Selenium.Extensions import ProxyExtension
+from Tiktok.Settings_Selenium.SuportDriver import removeCDC, EnhancedActionChains, proxy_data, geolocation
 
 
 class BaseClass:
@@ -60,12 +28,7 @@ class BaseClass:
         self.DRIVER = uc.Chrome
 
     def _set_up_driver(self, headless=False):
-        options = uc.ChromeOptions()
-
-        options.add_argument("--incognito")
-
         your_options = {
-            "options": options,
             "headless": headless,
             "browser_executable_path": executable_path,
             "user_multi_procs": True,
@@ -73,8 +36,26 @@ class BaseClass:
             "version_main": google_version,
         }
 
+        options = uc.ChromeOptions()
+
+        options.add_argument("--incognito")
+
+        if PROXY:
+            # proxy = ("64.32.16.8", 8080, "username", "password")  # your proxy with auth, this one is obviously fake
+            # pass  host, port, user, password
+            proxy_extension = ProxyExtension(**PROXY)
+            options.add_argument(f"--load-extension={proxy_extension.directory}")
+            resp = proxy_data(PROXY)
+
+            # ____________________________ location _______________________________
+            try:
+                capabilities = geolocation(resp.json()['loc'])
+                your_options['desired_capabilities'] = capabilities
+            except JSONDecodeError:
+                raise Exception("Щось не так з проксі. Було залучено останній з файлу 'proxies.txt'")
+
         # if not profile or user_data_dir == incognito
-        self.DRIVER = uc.Chrome(**your_options,)
+        self.DRIVER = uc.Chrome(options=options, **your_options,)
         removeCDC(self.DRIVER)
 
         self.action = EnhancedActionChains(self.DRIVER)
@@ -84,14 +65,14 @@ class BaseClass:
 
         return self.DRIVER
 
-    def run_driver(self, headless=False):
+    def run_driver(self, args, kwargs):
         try:
-            return self._set_up_driver(headless)
+            return self._set_up_driver(*args, **kwargs)
 
         except (ConnectionResetError, ProtocolError, TimeoutError, ReadTimeout,
                 ConnectionError, RemoteDisconnected) as e:
             logger.error(f'{type(e).__name__} in selenium_driver.py')
-            return self.run_driver(headless)
+            return self.run_driver(*args, **kwargs)
 
     def elem_exists(self, value, by=By.XPATH, wait=120, return_xpath=False, scroll_to=False):
         try:
