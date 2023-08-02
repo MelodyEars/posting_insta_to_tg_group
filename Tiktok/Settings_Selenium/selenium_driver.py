@@ -16,7 +16,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from SETTINGS import executable_path, google_version, PROXY
+from SETTINGS import executable_path, google_version, PROXY, TIKTOK_BROWSER_HEADLESS
 from Tiktok.Settings_Selenium.Extensions import ProxyExtension
 from Tiktok.Settings_Selenium.SuportDriver import removeCDC, EnhancedActionChains, proxy_data, geolocation
 
@@ -27,9 +27,9 @@ class BaseClass:
         self.action = None
         self.DRIVER = uc.Chrome
 
-    def _set_up_driver(self, headless=False):
+    def _set_up_driver(self):
         your_options = {
-            "headless": headless,
+            "headless": TIKTOK_BROWSER_HEADLESS,
             "browser_executable_path": executable_path,
             "user_multi_procs": True,
             "use_subprocess": False,
@@ -65,14 +65,14 @@ class BaseClass:
 
         return self.DRIVER
 
-    def run_driver(self, args, kwargs):
+    def run_driver(self):
         try:
-            return self._set_up_driver(*args, **kwargs)
+            return self._set_up_driver()
 
         except (ConnectionResetError, ProtocolError, TimeoutError, ReadTimeout,
                 ConnectionError, RemoteDisconnected) as e:
             logger.error(f'{type(e).__name__} in selenium_driver.py')
-            return self.run_driver(*args, **kwargs)
+            return self.run_driver()
 
     def elem_exists(self, value, by=By.XPATH, wait=120, return_xpath=False, scroll_to=False):
         try:

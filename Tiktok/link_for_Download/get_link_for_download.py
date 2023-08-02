@@ -12,7 +12,6 @@ from loguru import logger
 from selenium.webdriver.common.by import By
 
 from Tiktok.Settings_Selenium import BaseClass
-from SETTINGS import TIKTOK_BROWSER_HEADLESS
 
 
 class TiktokDownloader(BaseClass):
@@ -22,7 +21,7 @@ class TiktokDownloader(BaseClass):
         self.proxy = proxy
 
     def __enter__(self):
-        self.DRIVER = self.run_driver(headless=TIKTOK_BROWSER_HEADLESS)
+        self.DRIVER = self.run_driver()
 
         return self
 
